@@ -63,7 +63,44 @@ const App = Application.extend({
           'logout':                'logout'
         }
       }
-    }
+    },
+    logging: {
+      dependencies: {
+        services: [
+          'app',
+          'access',
+          'clusterStore',
+          'catalog',
+          'endpoint',
+          'external-utils',
+          'github',
+          'globalStore',
+          'intl',
+          'modal',
+          'router',
+          'resource-actions',
+          'scope',
+          'session',
+          'settings',
+          'store',
+          'tooltip',
+          'user-language',
+          'user-theme',
+        ],
+        externalRoutes: {
+          index:                   'index',
+          failWhale:               'failWhale',
+          authenticated:           'authenticated',
+          'authenticated.cluster': 'authenticated.cluster',
+          'authenticated.cluster.projects': 'authenticated.cluster.projects',
+          'authenticated.project': 'authenticated.project',
+          'authenticated.prefs':   'authenticated.prefs',
+          'authenticated.cluster.nodes': 'authenticated.cluster.nodes',
+          'authenticated.cluster.nodes.node': 'authenticated.cluster.nodes.node',
+          'logout':                'logout'
+        }
+      }
+    },
   }
 });
 

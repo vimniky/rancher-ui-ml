@@ -4501,6 +4501,11 @@ nav:
     link: "Preferences"
   api:
     link: "API & Keys"
+  tools:
+    tab: Tools
+    alerts: Alerts
+    notifiers: Notifiers
+    logging: Logging
 
 ##############################
 # Resource Actions

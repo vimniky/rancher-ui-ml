@@ -66,6 +66,32 @@ const rootNav = [
   },
   {
     scope: 'project',
+    id: 'tools',
+    localizedLabel: 'nav.tools.tab',
+    ctx: [getProjectId],
+    submenu: [
+      {
+        id: 'tools-alerts',
+        localizedLabel: 'nav.tools.alerts',
+        // icon: 'icon icon-key',
+        route: 'alert',
+        resourceScope: 'global',
+        resource: [],
+        ctx: [getProjectId],
+      },
+      {
+        id: 'tools-logging',
+        localizedLabel: 'nav.tools.logging',
+        // icon: 'icon icon-key',
+        route: 'logging',
+        resourceScope: 'global',
+        resource: [],
+        ctx: [getProjectId],
+      }
+    ]
+  },
+  {
+    scope: 'project',
     id: 'project-security',
     localizedLabel: 'nav.admin.security.tab',
     ctx: [getProjectId],
@@ -83,7 +109,6 @@ const rootNav = [
       },
     ],
   },
-
   // Cluster
   {
     scope: 'cluster',

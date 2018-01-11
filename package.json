@@ -87,7 +87,8 @@
     "paths": [
       "lib/global-admin",
       "lib/login",
-      "lib/shared"
+      "lib/shared",
+      "lib/logging"
     ]
   }
 }
