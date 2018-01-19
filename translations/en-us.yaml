@@ -1432,6 +1432,14 @@ waitingPage:
     setup:
       kubernetes: Setting up Kubernetes
 
+loggingPage:
+  tags:
+    keyPlaceholder: e.g. foo
+    valuePlaceholder: e.g. bar
+  keyValueForm:
+    keyPlaceholder: e.g. 192.168.1.10
+
+
 ##############################
 # Partials
 ##############################

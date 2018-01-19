@@ -1,0 +1,34 @@
+<section class="header clearfix">
+  <h1 class="pull-left">Logging</h1>
+</section>
+
+{{#accordion-list classNames="mt-20" as | al expandFn | }}
+  {{logging/form-output-tags
+      classNames="accordion-wrapper"
+      tags=tags
+      initialTags=model.outputTags
+      expandAll=al.expandAll
+      expandFn=expandFn
+  }}
+{{/accordion-list}}
+
+{{logging/targets-nav
+    currentLogging=currentLogging
+    targetType=targetType
+    isClusterLevel=isClusterLevel
+}}
+
+{{#if (eq targetType 'elasticsearch')}}
+  {{logging/target-elasticsearch model=model originalModel=originalModel tags=tags}}
+{{else if (eq targetType 'embedded')}}
+  {{#if isClusterLevel}}
+    {{logging/target-embedded model=model}}
+  {{/if}}
+{{else if (eq targetType 'splunk')}}
+  {{logging/target-splunk model=model}}
+{{else if (eq targetType 'kafka')}}
+  {{logging/target-kafka model=model}}
+{{/if}}
+
+{{top-errors errors=errors}}
+{{save-cancel cancelDisabled=true editing=true save="save"}}

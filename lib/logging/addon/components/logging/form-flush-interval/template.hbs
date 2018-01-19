@@ -1,0 +1,24 @@
+{{#accordion-list-item
+    title="Flush Interval"
+    detail="How often logs would be flushed from Fluentd to Elasticearch"
+    status=status
+    statusClass=statusClass
+    expandAll=expandAll
+    expand=(action expandFn)
+}}
+  <div class="row">
+    <div class="col span-4">
+      <label class="acc-label">Flush Interval</label>
+      <div class="input-group">
+        {{input-integer
+            min=1
+            value=flushInterval
+            class="form-control"
+            placeholder="e.g. 1"
+            aria-describedby="basic-addon2"
+        }}
+        <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
+      </div>
+    </div>
+  </div>
+{{/accordion-list-item}}

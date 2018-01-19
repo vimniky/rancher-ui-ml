@@ -1,0 +1,97 @@
+<h4 class="pt-15">Kafka Configuration</h4>
+<hr/>
+
+<div class="box mb-10 clearfix">
+
+  <div class="row">
+    <div class="col span-6 mt-0 pt-0">
+      <label class="acc-label" for="">Broker Type</label>
+      {{new-select
+          class="form-control text-capitalize"
+          content=brokerTypes
+          value=model.kafkaBrokerType
+          classNames="form-control"
+      }}
+    </div>
+
+    <div class="col span-6 mt-0" style="padding-top: 22px" >
+      <p class="text-info text-small"> You can choose either brokers or zookeeper KafkaBrokers </p>
+    </div>
+  </div>
+  <hr/>
+  {{#if (eq model.kafkaBrokerType 'zookeeper')}}
+    <p class="text-info text-small">
+      Zookeeper is for building coordination, configuration management, leader detection, detecting node update in kafka cluster, you could config the zookeeper host and port, zookeeper will talk to the Kafka cluster
+    </p>
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label" for="">Host</label>
+        {{input
+            type="text"
+            value=model.kafkaZookeeperHost
+            classNames="form-control"
+            placeholder="Enter an host"
+        }}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label" for="">Port</label>
+        {{input
+            type="text"
+            value=model.kafkaZookeeperPort
+            classNames="form-control"
+            placeholder="e.g. 8088"
+        }}
+      </div>
+    </div>
+  {{else}}
+    <p class="text-info text-small pb-0 mb-0">A Kafka cluster consists of one or more Brokers, config the host and port for each Broker. </p>
+    {{logging/form-key-value
+        keyLabel="Host"
+        valueLabel="Port"
+        minItems=1
+        keyPlaceholder="e.g. 192.168.33.176"
+        valuePlaceholder="e.g. 9092"
+        addButtonLabel=addButtonLabel
+        value=model.kafkaBrokers
+    }}
+  {{/if}}
+</div>
+
+<section class="box">
+  <div class="row mt-20">
+    <div class="col span-6 mt-0 pt-0">
+      <label class="acc-label" for="">Topic{{field-required}}</label>
+      {{input
+          type="text"
+          value=model.kafkaTopic
+          classNames="form-control"
+          placeholder="e.g. message"
+      }}
+      <p class="text-info text-small">Kafka categories for messages. They could be something like kubernetelogs or dockerlogs. </p>
+    </div>
+
+    <div class="col span-6 mt-0 pt-0">
+      <label class="acc-label" for="">Output Data Type</label>
+      {{new-select
+          class="form-control text-capitalize"
+          content=outputDataTypes
+          value=model.kafkaOutputDataType
+          classNames="form-control"
+      }}
+      <p class="text-info text-small">todo </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-6 mt-0 pt-0">
+      <label class="acc-label">Max Send Retires{{field-required}}</label>
+      {{input-integer
+          class="form-control"
+          min=1
+          value=model.kafkaMaxSendRetries
+          placeholder="e.g. 1"
+      }}
+      <p class="text-info text-small">The number of times to retry sending of messages to a leader. </p>
+    </div>
+  </div>
+</section>
