@@ -88,7 +88,8 @@
       "lib/global-admin",
       "lib/login",
       "lib/shared",
-      "lib/logging"
+      "lib/logging",
+      "lib/alert"
     ]
   }
 }

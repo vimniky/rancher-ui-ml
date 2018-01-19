@@ -88,6 +88,7 @@ Router.map(function() {
     // Per-Project
     this.route('project', {path: '/p/:project_id'}, function() {
       this.mount('logging', {path: '/logging', resetNamespace: true});
+      this.mount('alert', {path: '/alerts', resetNamespace: true});
       this.route('index', {path: '/'});
 
       // Workload
@@ -177,10 +178,6 @@ Router.map(function() {
         });
       });
 
-      this.route('alerts', {path: '/alerts', resetNamespace: true}, function() {
-      });
-      // this.route('logging', {path: '/logging', resetNamespace: true}, function() {
-      // });
       this.route('hooks', {path: '/api/hooks'}, function() {
         this.route('new-receiver', {path: '/add-receiver'});
         this.route('edit-receiver', {path: '/receiver/:receiver_id'});

@@ -75,9 +75,9 @@ const rootNav = [
         localizedLabel: 'nav.tools.alerts',
         // icon: 'icon icon-key',
         route: 'alert',
-        resourceScope: 'global',
         resource: [],
         ctx: [getProjectId],
+        resourceScope: 'global',
       },
       {
         id: 'tools-logging',

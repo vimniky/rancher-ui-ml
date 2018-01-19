@@ -1,0 +1,14 @@
+<section class="header clearfix">
+  <div class="pull-left pt-10"><h1>{{t 'nav.tools.alerts'}}</h1></div>
+  <div class="right-buttons">
+    <div class="btn-group-sm" >
+      {{#link-to (query-params alertState="all")  classNames="btn btn-sm bg-default mr-10"}}{{t 'alertPage.index.stateTabs.all'}}{{/link-to}}
+      {{#link-to (query-params alertState="active") classNames="btn btn-sm bg-default mr-10"}}{{t 'alertPage.index.stateTabs.active'}}{{/link-to}}
+      {{#link-to (query-params alertState="suppressed") classNames="btn btn-sm bg-default mr-10"}}{{t 'alertPage.index.stateTabs.suppressed'}}{{/link-to}}
+      {{#link-to (query-params alertState="disabled") classNames="btn btn-sm bg-default mr-40"}}{{t 'alertPage.index.stateTabs.disabled'}}{{/link-to}}
+    </div>
+    {{#link-to "new" classNames="btn btn-sm bg-primary"}}{{t 'alertPage.index.stateTabs.addAlert'}}{{/link-to}}
+  </div>
+</section>
+
+{{alert-table alertState=alertState model=model.alerts targetId=null}}

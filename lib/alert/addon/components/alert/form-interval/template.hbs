@@ -1,0 +1,12 @@
+<div class="form-interval" style="display: flex">
+  <div style="flex-grow: 1">
+    {{input-integer
+      min=1
+      value=interval
+      class="form-control"
+      placeholder=(t 'loggingPage.flushInterval.placeholder')
+      aria-describedby="basic-addon2"
+    }}
+  </div>
+  <div style="min-width: 120px;">{{new-select class="pr-40 time-unite-select bg-primary" content=timeUnits value=timeUnit}}</div>
+</div>

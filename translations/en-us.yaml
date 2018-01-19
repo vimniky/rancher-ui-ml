@@ -1439,6 +1439,22 @@ loggingPage:
   keyValueForm:
     keyPlaceholder: e.g. 192.168.1.10
 
+alertPage:
+  index:
+    stateTabs:
+      all: All
+      active: Active
+      suppressed: Suppressed
+      disabled: Disabled
+      addAlert: Add Alert
+    table:
+      noMatch: No alerts match the current search.
+      noData: No alerts
+      rules: Rules
+      endpoint: Endpoint
+  new:
+    addHeader: Add alert
+    editHeader: Edit alert
 
 ##############################
 # Partials
