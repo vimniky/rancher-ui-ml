@@ -1436,8 +1436,13 @@ loggingPage:
   tags:
     keyPlaceholder: e.g. foo
     valuePlaceholder: e.g. bar
+    addActionLabel: Add Tag
   keyValueForm:
     keyPlaceholder: e.g. 192.168.1.10
+  targetKafka:
+    addActionLabel: Add Broker
+    host: Host
+    port: Port
 
 alertPage:
   index:

@@ -2,14 +2,17 @@
   <h1 class="pull-left">Logging</h1>
 </section>
 
-{{#accordion-list classNames="mt-20" as | al expandFn | }}
-  {{logging/form-output-tags
-      classNames="accordion-wrapper"
-      tags=tags
-      initialTags=model.outputTags
-      expandAll=al.expandAll
-      expandFn=expandFn
+{{#accordion-list classNames="mt-20" showExpandAll=false as | al expandFn | }}
+  {{#accordion-list-item
+      title="tags"
+      detail="Tags are key/value pair used to filter logs"
+      expandOnInit=true
+      expand=(action expandFn)
   }}
+    {{form-key-value
+        addActionLabel="loggingPage.tags.addActionLabel"
+    }}
+  {{/accordion-list-item}}
 {{/accordion-list}}
 
 {{logging/targets-nav

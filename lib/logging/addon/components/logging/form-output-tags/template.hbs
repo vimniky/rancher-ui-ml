@@ -1,64 +1,10 @@
 {{#accordion-list-item
      title="tags"
      detail="Tags are key/value pair used to filter logs"
-     status=status
-     statusClass=statusClass
-     expandAll=expandAll
+     expandOnInit=true
      expand=(action expandFn)
 }}
-  <button class="btn bg-link icon-btn" {{action "addTag"}}>
-    <span class="darken"><i class="icon icon-plus text-small"/></span>
-    <span>Add Tag</span>
-  </button>
-
-  {{#if tags.length}}
-    <table class="table fixed no-lines mt-20">
-      <tr class="hidden-xs hidden-sm">
-        <th>Key{{field-required}}</th>
-        <th width="30">&nbsp;</th>
-        <th>Value{{field-required}}</th>
-        <th width="40">&nbsp;</th>
-      </tr>
-      {{#each tags as |tag|}}
-        <tr>
-          <td data-title="key">
-            {{input-paste
-                pasted="pastedTags"
-                class="form-control input-sm key"
-                type="text"
-                value=tag.key
-                placeholder="loggingPage.tags.keyPlaceholder"
-            }}
-          </td>
-
-          <td class="text-center">
-            <p class="input-sm">To</p>
-          </td>
-
-          <td data-title="tag">
-            {{input
-                class="form-control input-sm"
-                type="text"
-                value=tag.value
-                placeholder=(t 'loggingPage.tags.valuePlaceholder')
-            }}
-          </td>
-          <td class="text-right">
-            <button
-              class="btn bg-primary btn-sm"
-              {{action "removeTag" tag}}
-            >
-              <i class="icon icon-minus"/>
-              <span class="sr-only">
-                {{t 'generic.remove'}}
-              </span>
-            </button>
-          </td>
-        </tr>
-      {{/each}}
-    </table>
-    <div class="protip pt-10">
-      ProTip: Paste one or more lines of key=value pairs into any key field for easy bulk entry.
-    </div>
-  {{/if}}
+  {{form-key-value
+      addActionLabel="loggingPage.tags.addActionLabel"
+  }}
 {{/accordion-list-item}}

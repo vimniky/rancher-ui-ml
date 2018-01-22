@@ -44,15 +44,13 @@
       </div>
     </div>
   {{else}}
-    <p class="text-info text-small pb-0 mb-0">A Kafka cluster consists of one or more Brokers, config the host and port for each Broker. </p>
-    {{logging/form-key-value
-        keyLabel="Host"
-        valueLabel="Port"
-        minItems=1
-        keyPlaceholder="e.g. 192.168.33.176"
-        valuePlaceholder="e.g. 9092"
-        addButtonLabel=addButtonLabel
-        value=model.kafkaBrokers
+    <p class="text-info text-small">A Kafka cluster consists of one or more Brokers, config the host and port for each Broker. </p>
+    {{form-key-value
+        keyLabel="loggingPage.targetKafka.host"
+        valueLabel="loggingPage.targetKafka.port"
+        addActionLabel="loggingPage.targetKafka.addActionLabel"
+        keyPlaceholder="loggingPage.targetKafka.host"
+        valuePlaceholder="loggingPage.targetKafka.addActionLabel"
     }}
   {{/if}}
 </div>
