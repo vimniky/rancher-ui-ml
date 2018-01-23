@@ -1,0 +1,15 @@
+<section class="header clearfix">
+  <div class="pull-left pt-10"><h1>Notifiers</h1></div>
+  <div class="right-buttons">
+    <div class="btn-group-sm" >
+      {{#link-to (query-params type="all")  classNames="btn btn-sm bg-default mr-10"}}All{{/link-to}}
+      {{#link-to (query-params type="slack")  classNames="btn btn-sm bg-default mr-10"}}Slack{{/link-to}}
+      {{#link-to (query-params type="pagerduty") classNames="btn btn-sm bg-default mr-10"}}Pagerduty{{/link-to}}
+      {{#link-to (query-params type="email") classNames="btn btn-sm bg-default mr-10"}}Email{{/link-to}}
+      {{#link-to (query-params type="webhook") classNames="btn btn-sm bg-default mr-40"}}Webhook{{/link-to}}
+    </div>
+    <button class="btn btn-sm bg-primary" {{action "showNewEditModal"}}>Add Notifier</button>
+  </div>
+</section>
+
+{{notifier/notifier-table type=type model=notifiers}}

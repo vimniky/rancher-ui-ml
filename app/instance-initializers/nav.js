@@ -80,6 +80,15 @@ const rootNav = [
         resourceScope: 'global',
       },
       {
+        id: 'tools-notifiers',
+        localizedLabel: 'nav.tools.notifiers',
+        // icon: 'icon icon-key',
+        route: 'notifier',
+        resource: [],
+        ctx: [getProjectId],
+        resourceScope: 'global',
+      },
+      {
         id: 'tools-logging',
         localizedLabel: 'nav.tools.logging',
         // icon: 'icon icon-key',

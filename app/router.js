@@ -89,6 +89,11 @@ Router.map(function() {
     this.route('project', {path: '/p/:project_id'}, function() {
       this.mount('logging', {path: '/logging', resetNamespace: true});
       this.mount('alert', {path: '/alerts', resetNamespace: true});
+      this.route('notifier', {path: '/notifiers', resetNamespace: true}, function() {
+        this.route('index', {path: '/'});
+        this.route('new', {path: '/add'});
+        this.route('edit', {path: '/:notifier_id'});
+      });
       this.route('index', {path: '/'});
 
       // Workload
