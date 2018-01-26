@@ -12,9 +12,10 @@ export default Controller.extend({
   init(...args) {
     this._super(...args);
     const globalStore = get(this, 'globalStore')
-
     const notifiers = [
       {
+        actions: {},
+        availableActions: [],
         name: 'notifier-1',
         type: 'notifier',
         description: null,
@@ -38,6 +39,7 @@ export default Controller.extend({
         },
       },
     ];
+    // set(this, 'notifiers', notifiers)
   },
 
   actions: {

@@ -1,4 +1,4 @@
-<h4 class="pt-15">Kafka Configuration</h4>
+<h4 class="pt-30">Kafka Configuration</h4>
 <hr/>
 
 <div class="box mb-10 clearfix">
@@ -12,16 +12,13 @@
           value=model.kafkaBrokerType
           classNames="form-control"
       }}
-    </div>
-
-    <div class="col span-6 mt-0" style="padding-top: 22px" >
       <p class="text-info text-small"> You can choose either brokers or zookeeper KafkaBrokers </p>
     </div>
   </div>
   <hr/>
   {{#if (eq model.kafkaBrokerType 'zookeeper')}}
-    <p class="text-info text-small">
-      Zookeeper is for building coordination, configuration management, leader detection, detecting node update in kafka cluster, you could config the zookeeper host and port, zookeeper will talk to the Kafka cluster
+    <p class="text-info text-small mb-0">
+      Zookeeper is for building coordination, configuration management, leader detection, detecting node update in kafka cluster.
     </p>
     <div class="row">
       <div class="col span-6">
@@ -44,7 +41,7 @@
       </div>
     </div>
   {{else}}
-    <p class="text-info text-small">A Kafka cluster consists of one or more Brokers, config the host and port for each Broker. </p>
+    <p class="text-info text-small mb-0">A Kafka cluster consists of one or more Brokers, config the host and port for each Broker. </p>
     {{form-key-value
         keyLabel="loggingPage.targetKafka.host"
         valueLabel="loggingPage.targetKafka.port"
@@ -76,17 +73,16 @@
           value=model.kafkaOutputDataType
           classNames="form-control"
       }}
-      <p class="text-info text-small">todo </p>
     </div>
   </div>
 
   <div class="row">
     <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label">Max Send Retires{{field-required}}</label>
+      <label class="acc-label">Max Send Retires</label>
       {{input-integer
           class="form-control"
           min=1
-          value=model.kafkaMaxSendRetries
+          value=kafkaMaxSendRetries
           placeholder="e.g. 1"
       }}
       <p class="text-info text-small">The number of times to retry sending of messages to a leader. </p>

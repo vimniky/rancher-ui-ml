@@ -1,5 +1,6 @@
-<h4 class="pt-15">Splunk HTTP Event Collector Configuration</h4>
+<h4 class="pt-30">Splunk HTTP Event Collector Configuration</h4>
 <hr/>
+<section class="box">
 <p class="text-info text-small">
   You can find instructions on how to configre Splunk HEC (HTTP Event Collector)
   <a href="http://docs.splunk.com/Documentation/Splunk/7.0.0/Data/UsetheHTTPEventCollector" target="_blank">here</a>.
@@ -24,21 +25,13 @@
         placeholder="e.g. 8088"
     }}
     <p class="text-info text-small">
-      The HEC port, which is 8088 by default, you can find your this port on your splnuk's HEC Global Settings page.
+      The HEC port, which is 8088 by default, you can find this port on your splnuk's HEC Global Settings.
       <!-- <a target="_blank" href="http://docs.splunk.com/Documentation/SplunkCloud/6.6.3/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector">Detail</a> -->
      </p>
   </div>
 </div>
 
 <div class="row">
-  <div class="col span-6 mt-0 pt-0">
-    <label class="acc-label" for="">Protocol</label>
-    {{new-select
-        content=protocolChoices
-        value=model.splunkProtocol
-        classNames="form-control"
-    }}
-  </div>
   <div class="col span-6 mt-0 pt-0">
     <label class="acc-label" for="">Token{{field-required}}</label>
     {{input
@@ -52,9 +45,6 @@
       <a href="http://docs.splunk.com/Documentation/Splunk/7.0.0/Data/UsetheHTTPEventCollector#Configure_HTTP_Event_Collector_on_Splunk_Enterprise" target="_blank">Detail</a>
     </p>
   </div>
-</div>
-
-<div class="row box mb-20">
   <div class="col span-6 mt-0 pt-0">
     <label class="acc-label" for="">Source</label>
     {{input
@@ -68,16 +58,21 @@
       <a href="https://docs.splunk.com/Splexicon:Source" target="_blank">Detail</a>
     </p>
   </div>
+</div>
 
-  <div class="col span-6 mt-0 pt-0">
-    <label class="acc-label" for="">Time Format</label>
-    {{new-select
-        content=timeFormatChoices
-        value=model.splunkTimeFormat
-        classNames="form-control"
+<div class="row">
+  <div class="col span-12 mt-0 pt-0">
+    <label class="acc-label" for="useTLS">
+    {{input
+      type="checkbox"
+      classNames="form-control"
+      name="useTLS"
+      checked=tls
+      placeholder=""
     }}
-    <p class="text-info text-small">
-      You can find more infomation about splunk time format <a href="https://docs.splunk.com/Documentation/SplunkCloud/6.6.3/SearchReference/Commontimeformatvariables" target="_blank">here</a>.
-    </p>
+      Use TLS
+    </label>
   </div>
 </div>
+
+</section>

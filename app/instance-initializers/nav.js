@@ -66,7 +66,26 @@ const rootNav = [
   },
   {
     scope: 'project',
-    id: 'tools',
+    id: 'project-security',
+    localizedLabel: 'nav.admin.security.tab',
+    ctx: [getProjectId],
+    resource: ['projectroletemplatebinding'],
+    resourceScope: 'global',
+    submenu: [
+      {
+        id: 'project-security-roles',
+        localizedLabel: 'nav.admin.security.members',
+        icon: 'icon icon-key',
+        route: 'authenticated.project.security.members.index',
+        resource: ['projectroletemplatebinding'],
+        resourceScope: 'global',
+        ctx: [getProjectId],
+      },
+    ],
+  },
+  {
+    scope: 'project',
+    id: 'project-tools',
     localizedLabel: 'nav.tools.tab',
     ctx: [getProjectId],
     submenu: [
@@ -173,6 +192,25 @@ const rootNav = [
         ctx: [getClusterId],
       },
     ],
+  },
+  {
+    scope: 'cluster',
+    id: 'cluster-tools',
+    localizedLabel: 'nav.tools.tab',
+    ctx: [getClusterId],
+    resource: [],
+    resourceScope: 'global',
+    submenu: [
+      {
+        id: 'cluster-tools-logging',
+        localizedLabel: 'nav.tools.logging',
+        // icon: 'icon icon-key',
+        route: 'logging',
+        resourceScope: 'global',
+        resource: [],
+        ctx: [getClusterId],
+      }
+    ]
   },
 //  {
 //    scope: 'cluster',

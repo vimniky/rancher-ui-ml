@@ -1,0 +1,49 @@
+<h4 class="pt-30">Syslog Configuration</h4>
+<hr/>
+<section class="box">
+<div class="row mt-20">
+  <div class="col span-6 mt-0 pt-0">
+    <label class="acc-label" for="">Host{{field-required}}</label>
+    {{input
+        type="text"
+        value=model.syslogConfig.host
+        classNames="form-control"
+        placeholder="e.g. 192.168.1.10"
+    }}
+  </div>
+  <div class="col span-6 mt-0 pt-0">
+    <label class="acc-label">Port</label>
+    {{input-integer
+        class="form-control"
+        min=1
+        max=65535
+        value=model.syslogConfig.port
+        placeholder="e.g. 8088"
+    }}
+    <p class="text-info text-small"></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6 mt-0 pt-0">
+    <label class="acc-label" for="">Program</label>
+    {{input
+        type="text"
+        value=model.syslogConfig.program
+        classNames="form-control"
+        placeholder="Enter your source"
+    }}
+    <p class="text-info text-small"></p>
+  </div>
+  <div class="col span-6 mt-0 pt-0">
+    <label class="acc-label">Severity</label>
+    {{new-select
+        class="form-control text-capitalize"
+        content=severities
+        value=model.syslogConfig.severity
+        classNames="form-control"
+    }}
+  </div>
+</div>
+
+</section>

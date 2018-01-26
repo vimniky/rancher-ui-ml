@@ -2,12 +2,26 @@
   <h1 class="pull-left">Logging</h1>
 </section>
 
+<div class="banner bg-info">
+  <div class="banner-icon p-20"><i class="icon icon-info"></i></div>
+  <div class="banner-message p-20">
+    We will collect the standard output and standard error output for each container, the log files which under path<code> /var/log/containers/ </code>on each host. The log will be routed to the target you choosed below.
+  </div>
+</div>
+
+{{logging/targets-nav
+    currentLogging=currentLogging
+    targetType=targetType
+    isClusterLevel=isClusterLevel
+}}
+
 {{#accordion-list classNames="mt-20" showExpandAll=false as | al expandFn | }}
   {{#accordion-list-item
-      title="tags"
-      detail="Tags are key/value pair used to filter logs"
-      expandOnInit=true
-      expand=(action expandFn)
+       title="tags"
+       detail="Tags are key/value pair used to filter logs"
+       expandOnInit=true
+       expand=(action expandFn)
+       showExpand=false
   }}
     {{form-key-value
         addActionLabel="loggingPage.tags.addActionLabel"
@@ -15,11 +29,22 @@
   {{/accordion-list-item}}
 {{/accordion-list}}
 
-{{logging/targets-nav
-    currentLogging=currentLogging
-    targetType=targetType
-    isClusterLevel=isClusterLevel
-}}
+<div class="row">
+  <div class="col span-4">
+    <span class="acc-label">Flush Interval</span>
+    <div class="input-group">
+      {{input-integer
+          min=1
+          value=flushInterval
+          class="form-control"
+          placeholder="e.g. 1"
+          aria-describedby="basic-addon2"
+      }}
+      <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
+    </div>
+    <p class="text-info text-small"> How often buffered logs would be flushed to Elasticearch </p>
+  </div>
+</div>
 
 {{#if (eq targetType 'elasticsearch')}}
   {{logging/target-elasticsearch model=model originalModel=originalModel tags=tags}}
@@ -31,6 +56,14 @@
   {{logging/target-splunk model=model}}
 {{else if (eq targetType 'kafka')}}
   {{logging/target-kafka model=model}}
+{{else if (eq targetType 'syslog')}}
+  {{logging/target-syslog model=model}}
+{{/if}}
+
+<div class="over-hr mt-40"><span {{action "togglePreview"}}>preview <i class="icon {{if previewOpen 'icon-chevron-up' 'icon-chevron-down'}}"></i></span></div>
+
+{{#if previewOpen}}
+  {{code-block language="yaml" code=logPreview}}
 {{/if}}
 
 {{top-errors errors=errors}}

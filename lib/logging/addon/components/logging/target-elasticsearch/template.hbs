@@ -1,6 +1,6 @@
-<h4 class="pt-15">Elasticsearch Configuration</h4>
+<h4 class="pt-30">Elasticsearch Configuration</h4>
 <hr/>
-<section class="pb-30">
+<section class="pb-30 box">
   <div class="row">
     <div class="col span-6 mt-0 pt-0">
       <label class="acc-label" for="">Host{{field-required}}</label>
@@ -22,33 +22,6 @@
       }}
     </div>
   </div>
-
-  <label class="acc-label" for="">Optional</label>
-  <div class="row box">
-    <p class="text-info text-small mt-0 pt-0">
-      If you are paid Elasticsearch user, you can provide your Elasticsearch username and password. You can find more information about Elasticsearch pricing
-      <a href="https://www.elastic.co/cloud/as-a-service/pricing" target="_blank">here</a>.
-    </p>
-    <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label" for="">User Name</label>
-      {{input
-          type="text"
-          value=model.esAuthUser
-          classNames="form-control"
-          placeholder="Enter your Elasticsearch username"
-      }}
-    </div>
-    <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label">Password</label>
-      {{input
-          type="text"
-          value=model.esAuthPassword
-          classNames="form-control"
-          placeholder="Enter your Elasticsearch password"
-      }}
-    </div>
-  </div>
-  <hr/>
 </section>
 
 {{#accordion-list as | al expandFn |}}
@@ -57,12 +30,35 @@
       model=model
       originalModel=originalModel
       expandAll=al.expandAll
+      defaultPrefix=defaultPrefix
       expandFn=expandFn
   }}
-  {{logging/form-flush-interval
-      originalFlushInterval=originalModel.outputFlushInterval
-      flushInterval=model.outputFlushInterval
-      expandAll=al.expandAll
-      expandFn=expandFn
+  {{#accordion-list-item
+       title="Elasticsearch Pricing"
+       detail="If you are paid Elasticsearch user, you can provide your Elasticsearch username and password. "
+       showStatus=false
+       expandAll=al.expandAll
+       expand=(action expandFn)
   }}
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label" for="">User Name</label>
+        {{input
+            type="text"
+            value=model.esAuthUser
+            classNames="form-control"
+            placeholder="e.g. username"
+        }}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">Password</label>
+        {{input
+            type="text"
+            value=model.esAuthPassword
+            classNames="form-control"
+            placeholder="e.g. xxx"
+        }}
+      </div>
+    </div>
+  {{/accordion-list-item}}
 {{/accordion-list}}
