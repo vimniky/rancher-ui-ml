@@ -205,7 +205,7 @@ const rootNav = [
         id: 'cluster-tools-logging',
         localizedLabel: 'nav.tools.logging',
         // icon: 'icon icon-key',
-        route: 'logging',
+        route: 'authenticated.cluster.logging',
         resourceScope: 'global',
         resource: [],
         ctx: [getClusterId],

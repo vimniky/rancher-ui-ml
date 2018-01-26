@@ -47,7 +47,7 @@ Router.map(function() {
 
     // Per-Cluster
     this.route('cluster', {path: '/c/:cluster_id'}, function() {
-      this.mount('logging', {path: '/logging', resetNamespace: true});
+      this.mount('logging', {path: '/logging'});
       this.route('index', {path: '/'});
       this.route('edit');
 

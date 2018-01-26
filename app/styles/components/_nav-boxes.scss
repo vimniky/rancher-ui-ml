@@ -1,5 +1,8 @@
 .logging-targets {
-
+  .none {
+    background-image: url('images/providers/none.svg');
+    background-size: 120px 70px;
+  }
   .elasticsearch {
     background-image: url('images/providers/elasticsearch.svg');
     background-size: 60px 60px;

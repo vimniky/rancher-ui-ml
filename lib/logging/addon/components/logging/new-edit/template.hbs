@@ -1,57 +1,74 @@
 <section class="header clearfix">
-  <h1 class="pull-left">Logging</h1>
+  <h1 class="pull-left text-capitalize">{{pageScope}} Logging</h1>
 </section>
 
 <div class="banner bg-info">
   <div class="banner-icon p-20"><i class="icon icon-info"></i></div>
   <div class="banner-message p-20">
-    We will collect the standard output and standard error output for each container, the log files which under path<code> /var/log/containers/ </code>on each host. The log will be routed to the target you choosed below.
+    We will collect the standard output and standard error for each container, the log files which under path<code> /var/log/containers/ </code>on each host. The log will be shipped to the target you choose below.
   </div>
 </div>
-
 {{logging/targets-nav
     currentLogging=currentLogging
     targetType=targetType
     isClusterLevel=isClusterLevel
+    pageScope=pageScope
 }}
 
-{{#accordion-list classNames="mt-20" showExpandAll=false as | al expandFn | }}
-  {{#accordion-list-item
-       title="tags"
-       detail="Tags are key/value pair used to filter logs"
-       expandOnInit=true
-       expand=(action expandFn)
-       showExpand=false
-  }}
-    {{form-key-value
-        addActionLabel="loggingPage.tags.addActionLabel"
-    }}
-  {{/accordion-list-item}}
-{{/accordion-list}}
-
-<div class="row">
-  <div class="col span-4">
-    <span class="acc-label">Flush Interval</span>
-    <div class="input-group">
-      {{input-integer
-          min=1
-          value=flushInterval
-          class="form-control"
-          placeholder="e.g. 1"
-          aria-describedby="basic-addon2"
-      }}
-      <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
+{{#if (eq targetType 'embedded')}}
+  <div class="banner bg-warning">
+    <div class="banner-icon p-20"><i class="icon icon-alert"></i></div>
+    <div class="banner-message p-20">
+      Embedded log is just for testing, no persistent storage will be provided.
     </div>
-    <p class="text-info text-small"> How often buffered logs would be flushed to Elasticearch </p>
   </div>
-</div>
+  <div class="box">
+    <h3>Cluster requirements:</h3>
+    <ul>
+      <li>The embedded deployment includes ElasticSearch and Kibana which requests at least 2 CPU and 4G MEM available on the node.</li>
+    </ul>
+  </div>
+{{/if}}
+
+{{#unless (eq targetType 'none')}}
+  {{#accordion-list classNames="mt-20" showExpandAll=false as | al expandFn | }}
+    {{#accordion-list-item
+        title="tags"
+        detail="Tags are key/value pair used to filter logs"
+        expandOnInit=true
+        expand=(action expandFn)
+        showExpand=false
+    }}
+      {{form-key-value
+          addActionLabel="loggingPage.tags.addActionLabel"
+      }}
+    {{/accordion-list-item}}
+  {{/accordion-list}}
+
+  <div class="row">
+    <div class="col span-4">
+      <span class="acc-label">Flush Interval</span>
+      <div class="input-group">
+        {{input-integer
+            min=1
+            value=flushInterval
+            class="form-control"
+            placeholder="e.g. 1"
+            aria-describedby="basic-addon2"
+        }}
+        <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
+      </div>
+      <p class="text-info text-small"> How often buffered logs would be flushed to Elasticearch </p>
+    </div>
+  </div>
+{{/unless}}
 
 {{#if (eq targetType 'elasticsearch')}}
-  {{logging/target-elasticsearch model=model originalModel=originalModel tags=tags}}
+  {{logging/target-elasticsearch model=model tags=tags}}
 {{else if (eq targetType 'embedded')}}
-  {{#if isClusterLevel}}
-    {{logging/target-embedded model=model}}
-  {{/if}}
+  <!-- {{#if isClusterLevel}}
+       {{logging/target-embedded model=model}}
+       {{/if}} -->
 {{else if (eq targetType 'splunk')}}
   {{logging/target-splunk model=model}}
 {{else if (eq targetType 'kafka')}}
@@ -60,10 +77,13 @@
   {{logging/target-syslog model=model}}
 {{/if}}
 
-<div class="over-hr mt-40"><span {{action "togglePreview"}}>preview <i class="icon {{if previewOpen 'icon-chevron-up' 'icon-chevron-down'}}"></i></span></div>
+{{#if showPreview}}
+  <div class="over-hr mt-40"><span {{action "togglePreview"}}>preview <i class="icon {{if previewOpen 'icon-chevron-up' 'icon-chevron-down'}}"></i></span></div>
 
-{{#if previewOpen}}
-  {{code-block language="yaml" code=logPreview}}
+  {{#if previewOpen}}
+    <h3 class="text-muted">With the current configuration, the generated log looks like:</h3>
+    {{code-block language="yaml" code=logPreview}}
+  {{/if}}
 {{/if}}
 
 {{top-errors errors=errors}}
