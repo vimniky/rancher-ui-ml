@@ -1456,7 +1456,7 @@ alertPage:
       noMatch: No alerts match the current search.
       noData: No alerts
       rules: Rules
-      endpoint: Endpoint
+      notifiers: Notifiers
   new:
     addHeader: Add alert
     editHeader: Edit alert
