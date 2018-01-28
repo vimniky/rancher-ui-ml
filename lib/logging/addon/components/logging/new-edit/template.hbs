@@ -19,7 +19,7 @@
   <div class="banner bg-warning">
     <div class="banner-icon p-20"><i class="icon icon-alert"></i></div>
     <div class="banner-message p-20">
-      Embedded log is just for testing, no persistent storage will be provided.
+      Embedded log is experimental, no persistent storage will be provided.
     </div>
   </div>
   <div class="box">
@@ -29,39 +29,6 @@
     </ul>
   </div>
 {{/if}}
-
-{{#unless (eq targetType 'none')}}
-  {{#accordion-list classNames="mt-20" showExpandAll=false as | al expandFn | }}
-    {{#accordion-list-item
-        title="tags"
-        detail="Tags are key/value pair used to filter logs"
-        expandOnInit=true
-        expand=(action expandFn)
-        showExpand=false
-    }}
-      {{form-key-value
-          addActionLabel="loggingPage.tags.addActionLabel"
-      }}
-    {{/accordion-list-item}}
-  {{/accordion-list}}
-
-  <div class="row">
-    <div class="col span-4">
-      <span class="acc-label">Flush Interval</span>
-      <div class="input-group">
-        {{input-integer
-            min=1
-            value=flushInterval
-            class="form-control"
-            placeholder="e.g. 1"
-            aria-describedby="basic-addon2"
-        }}
-        <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
-      </div>
-      <p class="text-info text-small"> How often buffered logs would be flushed to Elasticearch </p>
-    </div>
-  </div>
-{{/unless}}
 
 {{#if (eq targetType 'elasticsearch')}}
   {{logging/target-elasticsearch model=model tags=tags}}
@@ -75,6 +42,48 @@
   {{logging/target-kafka model=model}}
 {{else if (eq targetType 'syslog')}}
   {{logging/target-syslog model=model}}
+{{/if}}
+
+{{#if (and (not showAdvanced) (not-eq targetType 'none'))}}
+  <div class="clearfix">
+    <div class="pull-right text-small">
+      <a role="button" class="btn bg-transparent p-0" {{action "toggleAdvanced"}}>Show advanced options</a>
+    </div>
+  </div>
+{{/if}}
+
+{{#if (and showAdvanced (not-eq targetType 'none'))}}
+  <section class="box mt-20">
+    <div class="row">
+      <p class="text-info text-small mt-0">
+        Tags are key/value pair used to filter logs
+      </p>
+      <div class="col span-12">
+        {{form-key-value
+            addActionLabel="loggingPage.tags.addActionLabel"
+        }}
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col span-4">
+        <span class="acc-label">Flush Interval</span>
+        <div class="input-group">
+          {{input-integer
+              min=1
+              value=flushInterval
+              class="form-control"
+              placeholder="e.g. 1"
+              aria-describedby="basic-addon2"
+          }}
+          <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
+        </div>
+        <p class="text-info text-small"> How often buffered logs would be flushed to Elasticearch </p>
+      </div>
+    </div>
+  </section>
 {{/if}}
 
 {{#if showPreview}}

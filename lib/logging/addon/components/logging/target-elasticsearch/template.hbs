@@ -1,6 +1,6 @@
 <h4 class="pt-30">Elasticsearch Configuration</h4>
 <hr/>
-<section class="pb-30 box">
+<section class="mb-30 box">
   <div class="row">
     <div class="col span-6 mt-0 pt-0">
       <label class="acc-label" for="">Host{{field-required}}</label>
@@ -22,6 +22,20 @@
       }}
     </div>
   </div>
+  <div class="row">
+    <div class="col span-12">
+      <label class="acc-label" for="useTLS">
+        {{input
+            type="checkbox"
+            classNames="form-control"
+            name="useTLS"
+            checked=tls
+            placeholder=""
+        }}
+        Use TLS
+      </label>
+    </div>
+  </div>
 </section>
 
 {{#accordion-list classNames="mt-30" as | al expandFn |}}
@@ -34,8 +48,8 @@
       expandFn=expandFn
   }}
   {{#accordion-list-item
-       title="Elasticsearch Pricing"
-       detail="If you are paid Elasticsearch user, you can provide your Elasticsearch username and password. "
+       title="Elasticsearch X-Pack Security option"
+       detail="If your elasticsearch use X-Pack built-in native authentication features, put your username and password below."
        showStatus=false
        expandAll=al.expandAll
        expand=(action expandFn)
