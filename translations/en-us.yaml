@@ -1445,6 +1445,8 @@ loggingPage:
     port: Port
 
 alertPage:
+  create: Create
+  save: Save
   index:
     stateTabs:
       all: All

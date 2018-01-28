@@ -99,15 +99,6 @@ const rootNav = [
         resourceScope: 'global',
       },
       {
-        id: 'tools-notifiers',
-        localizedLabel: 'nav.tools.notifiers',
-        // icon: 'icon icon-key',
-        route: 'notifier',
-        resource: [],
-        ctx: [getProjectId],
-        resourceScope: 'global',
-      },
-      {
         id: 'tools-logging',
         localizedLabel: 'nav.tools.logging',
         // icon: 'icon icon-key',
@@ -209,7 +200,16 @@ const rootNav = [
         resourceScope: 'global',
         resource: [],
         ctx: [getClusterId],
-      }
+      },
+      {
+        id: 'tools-notifiers',
+        localizedLabel: 'nav.tools.notifiers',
+        // icon: 'icon icon-key',
+        route: 'authenticated.cluster.notifier',
+        resourceScope: 'global',
+        resource: [],
+        ctx: [getClusterId],
+      },
     ]
   },
 //  {

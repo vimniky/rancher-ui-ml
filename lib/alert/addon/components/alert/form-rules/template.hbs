@@ -3,16 +3,19 @@
     <div><label class="acc-label pl-50">Target Type</label></div>
     <div class="input-group">
       <div class="input-group-addon pl-0">When</div>
-      {{new-select disabled=(not isCreate) class="form-control text-capitalize" content=model.targetTypes value=model.targetType}}
+      {{new-select
+          disabled=(not isCreate)
+          class="form-control text-capitalize"
+          content=targetTypes
+          value=targetType
+      }}
     </div>
   </div>
 
-  {{#unless (eq model.targetType 'metric')}}
-    <div class="col span-4 mr-0">
-      <div><label class="acc-label">Target{{field-required}}</label></div>
-      {{alert/form-target disabled=(not isCreate) targetType=model.targetType model=model}}
-    </div>
-  {{/unless}}
+  <div class="col span-4 mr-0">
+    <div><label class="acc-label">Target{{field-required}}</label></div>
+    {{alert/form-target disabled=(not isCreate) targetType=model.targetType model=model}}
+  </div>
 
   {{#if (eq model.targetType 'pod')}}
     <div class="col span-4">
@@ -26,34 +29,17 @@
         {{new-select content=model.nodeRules value=model.nodeRule.condition}}
       </div>
     </div>
-  {{else if (eq model.targetType 'metric')}}
-    <div class="col span-5 mr-10">
-      <div class="acc-label" style="padding-left: 34px">Rule{{field-required}}</div>
-      <div class="input-group">
-        <span class="input-group-addon pl-0 ml-0">is</span>
-        {{input
-            class="form-control"
-            value=model.metricRule.expr
-            placeholder='e.g. go_goroutine[job="Prom"] > 1'
-        }}
-        <span class="input-group-addon pr-0">for</span>
-      </div>
-    </div>
-    <div class="col span-3">
-      <div class="acc-label">Duration{{field-required}}</div>
-      {{alert/form-interval value=model.metricRule.holdDuration}}
-    </div>
   {{else}}
     <div class="col span-4 ml-0" style="padding-top:32px">
       <div class="input-group p-0">
         <span class="input-group-addon">are</span>
         {{input-slider
-            value=model.percent
+            value=percent
             valueMin=0
             valueMax=100
             step=1
         }}
-        <span class="input-group-addon">{{model.percent}}%  unavailable</span>
+        <span class="input-group-addon">{{percent}}%  unavailable</span>
       </div>
     </div>
   {{/if}}
