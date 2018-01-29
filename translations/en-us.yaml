@@ -1467,7 +1467,7 @@ alertPage:
 notifierPage:
   index:
     table:
-      createdAt: Created At
+      createdAt: Created
 ##############################
 # Partials
 ##############################

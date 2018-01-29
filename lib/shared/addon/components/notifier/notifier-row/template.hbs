@@ -7,11 +7,16 @@
 <td data-title="{{dt.state}}" >
   {{badge-state model=model}}
 </td>
-<td data-title="{{dt.type}}" class="clip">
-  {{model.type}}
+
+<td data-title="{{dt.name}}" >
+  {{model.name}}
 </td>
-<td data-title="{{dt.createdAt}}" class="clip">
-  {{createdAt}}
+
+<td data-title="{{dt.type}}" class="clip">
+  {{model.notifierType}}
+</td>
+<td data-title="{{dt.created}}" class="clip">
+  {{model.created}}
 </td>
 <td data-title="{{t 'generic.actions'}}" class="actions">
   {{action-menu model=model}}

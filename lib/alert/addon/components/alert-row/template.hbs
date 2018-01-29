@@ -6,6 +6,9 @@
 <td data-title="{{dt.state}}" >
   {{badge-state model=model}}
 </td>
+<td data-title="{{dt.displayName}}" class="clip">
+  {{model.displayName}}
+</td>
 <td data-title="{{dt.description}}" class="clip">
   {{model.description}}
 </td>
@@ -13,28 +16,10 @@
   <div class="text-small">{{model.targetType}}{{if (eq model.targetType 'metric') '' (concat '/' model.objectName)}}</div>
   <div class="text-small text-muted">{{model.rules}}</div>
 </td>
-<td data-title="{{dt.endpoint}}" >
-  {{#if model.recipient}}
-    <div class="text-small">
-      {{model.recipient.recipientType}}
-    </div>
-    <div class="text-small text-muted">
-      {{model.recipient.recipientValue}}
-    </div>
-  {{else}}
-    <div class="text-muted">
-      {{t 'generic.none'}}
-    </div>
-  {{/if}}
+<td data-title="{{dt.notifiers}}" >
+  {{model.recipient.recipientType}}
 </td>
 
-<td data-title="{{dt.startAt}}" class="force-wrap">
-  <span class="{{if (eq model._startsAt 'None') 'text-muted' ''}}"> {{model._startsAt}} </span>
-</td>
-
-<td data-title="{{dt.endsAt}}" class="force-wrap">
-  <span class="{{if (eq model._endsAt 'None') 'text-muted' ''}}"> {{model._endsAt}} </span>
-</td>
 <td data-title="{{t 'generic.actions'}}" class="actions">
   {{action-menu model=model}}
 </td>
