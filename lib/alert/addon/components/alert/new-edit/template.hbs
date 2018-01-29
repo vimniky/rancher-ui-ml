@@ -12,38 +12,54 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col span-4">
-    <label class="acc-label">Initial Wait</label>
-    {{alert/form-interval value=3}}
-    <p class="text-info text-small">
-      How long to initially wait to send a notification when an alert is triggered
-    </p>
-  </div>
-  <div class="col span-4">
-    <label class="acc-label">Repeat Interval</label>
-    {{alert/form-interval value=3}}
-    <p class="text-info text-small">
-      How long to wait before sending a notification again if it has already been sent successfully for an alert
-    </p>
+<div class="box mt-20">
+  {{alert/form-rules
+      pods=pods
+      workloads=workloads
+      isCreate=isCreate
+      model=model
+  }}
+  <hr/>
+  {{alert/form-notifier
+      isCreate=isCreate
+      model=model
+  }}
+</div>
+
+<div class="box mt-20">
+  <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">Initial Wait</label>
+      {{alert/form-interval value=3}}
+      <p class="text-info text-small">
+        How long to initially wait to send a notification when an alert is triggered
+      </p>
+    </div>
+
+    <div class="col span-6">
+      <label class="acc-label">Interval</label>
+      {{alert/form-interval value=3}}
+      <p class="text-info text-small">Repeat interval of sending a notification when an alert is active.</p>
+    </div>
   </div>
 
-  <div class="col span-4">
-    <label class="acc-label">Severity</label>
-    {{new-select
-        classNames="text-capitalize form-control"
-        content=severities
-        value=model.severity
-    }}
+  <div>
+    <div><label class="acc-label">Severity</label></div>
+    <label class="mr-10 text-info">{{radio-button selection=severity value="info"}} Info</label>
+    <label class="mr-10 text-warning">{{radio-button selection=severity value="warning"}} Warning</label>
+    <label class="mr-10 text-error">{{radio-button selection=severity value="critical"}} Critical</label>
   </div>
 </div>
 
-{{alert/form-rules isCreate=isCreate model=model}}
 
 <div class="mt-20">
   {{top-errors errors=errors}}
 </div>
 
 <div class="mv-20">
-  {{save-cancel createLabel=(if isCreate 'alertPage.create' 'alertPage.save') save="save" cancel="cancel"}}
+  {{save-cancel
+      createLabel=(if isCreate 'alertPage.create' 'alertPage.save')
+      save="save"
+      cancel="cancel"
+  }}
 </div>

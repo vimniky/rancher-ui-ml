@@ -1445,6 +1445,7 @@ loggingPage:
     port: Port
 
 alertPage:
+  addSelectorLabel: Add Selector
   create: Create
   save: Save
   index:

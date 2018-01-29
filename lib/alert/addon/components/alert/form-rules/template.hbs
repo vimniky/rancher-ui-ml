@@ -1,46 +1,77 @@
-<section class="row">
-  <div class="col span-4 mr-10">
-    <div><label class="acc-label pl-50">Target Type</label></div>
-    <div class="input-group">
-      <div class="input-group-addon pl-0">When</div>
+<div class="row">
+  <div class="col span-3">
+    <div><label class="acc-label">Target Type</label></div>
+    {{new-select
+        class="form-control"
+        disabled=(not isCreate)
+        class="form-control text-capitalize"
+        content=targetTypes
+        value=targetType
+    }}
+  </div>
+  <div class="col span-3">
+    <div><label class="acc-label">Target</label></div>
+    {{#if disabled}}
       {{new-select
-          disabled=(not isCreate)
-          class="form-control text-capitalize"
-          content=targetTypes
-          value=targetType
+          class="form-control"
+          content=targets
+          optionValuePath="id"
+          optionLabelPath="name"
+          value=targetId
+          disabled=true
+      }}
+    {{else}}
+      {{new-select
+          content=targets
+          class="form-control"
+          value=targetId
+          optionValuePath="id"
+          optionLabelPath="name"
+          placeholder="Choose a target"
+      }}
+    {{/if}}
+  </div>
+
+  {{#if (eq targetType 'pod')}}
+    <div class="col span-3">
+      <div class="acc-label">Condition</div>
+      {{new-select
+          class="form-control"
+          value=podRule
+          content=podRules
+          optionValuePath="id"
+          optionLabelPath="label"
+          placeholder="Choose a Rule"
       }}
     </div>
-  </div>
-
-  <div class="col span-4 mr-0">
-    <div><label class="acc-label">Target{{field-required}}</label></div>
-    {{alert/form-target disabled=(not isCreate) targetType=model.targetType model=model}}
-  </div>
-
-  {{#if (eq model.targetType 'pod')}}
-    <div class="col span-4">
-      <div style="padding: 34px 0 0 15px">is unhealthy</div>
-    </div>
-  {{else if (eq model.targetType 'node')}}
-    <div class="col span-4 pl-0">
-      <div class="acc-label" style="padding-left: 34px">Node Condition</div>
-      <div class="input-group">
-        <span class="input-group-addon">is</span>
-        {{new-select content=model.nodeRules value=model.nodeRule.condition}}
+    {{#if (eq podRule 'c')}}
+      <div class="col span-3">
+        <div class="acc-label">Times</div>
+        {{alert/form-int value=restartedTimes}}
       </div>
-    </div>
-  {{else}}
-    <div class="col span-4 ml-0" style="padding-top:32px">
-      <div class="input-group p-0">
-        <span class="input-group-addon">are</span>
+    {{/if}}
+  {{else if (eq targetType 'workload')}}
+    <div class="col span-5">
+      <div class="acc-label">Condition</div>
+      <div class="input-group pt-5">
         {{input-slider
             value=percent
             valueMin=0
             valueMax=100
             step=1
         }}
-        <span class="input-group-addon">{{percent}}%  unavailable</span>
+        <span class="input-group-addon">{{percent}}% are Unavailable</span>
       </div>
     </div>
+  {{else}}
+    <div> todo </div>
   {{/if}}
-</section>
+</div>
+
+{{#if (and showWorkloadSelectors (eq targetType 'workload'))}}
+  <hr/>
+  <p class="text-info text-small">Workloads that match all the selectors will be selected.</p>
+  {{form-key-value
+      addActionLabel="alertPage.addSelectorLabel"
+  }}
+{{/if}}
