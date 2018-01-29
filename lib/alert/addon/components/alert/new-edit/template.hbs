@@ -18,11 +18,13 @@
       workloads=workloads
       isCreate=isCreate
       model=model
+      overviewRules=overviewData.rules
   }}
   <hr/>
   {{alert/form-notifier
       isCreate=isCreate
       notifiers=notifiers
+      overviewNotifiers=overviewData.notifiers
       model=model
   }}
 </div>
@@ -71,7 +73,11 @@
       </li>
     </ul>
     <div>
-      When Pod <code>xxxx</code> is not running.
+      {{#if overviewData.rules.pod}}
+          When {{overviewData.rules.pod.targetType}} <code>{{overviewData.rules.pod.targetName}}</code> is not running.
+      {{else if overviewData.rules.workload}}
+          When {{overviewData.rules.workload.targetType}} <code>{{overviewData.rules.workload.targetName}}</code> is not running.
+      {{/if}}
     </div>
   </div>
 </section>

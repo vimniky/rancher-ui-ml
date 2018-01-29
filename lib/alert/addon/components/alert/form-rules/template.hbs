@@ -21,7 +21,7 @@
           disabled=true
       }}
     {{else}}
-      {{new-select
+      {{searchable-select
           content=targets
           class="form-control"
           value=targetId
@@ -73,5 +73,8 @@
   <p class="text-info text-small">Workloads that match all the selectors will be selected.</p>
   {{form-key-value
       addActionLabel="alertPage.addSelectorLabel"
+      initialStr=null
+      initialMap=null
+      initialArray=initialArray
   }}
 {{/if}}

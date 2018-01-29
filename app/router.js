@@ -47,6 +47,7 @@ Router.map(function() {
 
     // Per-Cluster
     this.route('cluster', {path: '/c/:cluster_id'}, function() {
+      this.mount('alert', {path: '/alerts'});
       this.route('notifier', {path: '/notifiers'}, function() {
         this.route('index', {path: '/'});
         this.route('new', {path: '/add'});
