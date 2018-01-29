@@ -1,0 +1,38 @@
+<section class="row">
+  <div class="col span-11-of-24">
+    <div class="acc-label"> Notifier </div>
+    {{new-select
+        classNames="text-capitalize form-control input-sm"
+        content=notifiers
+        value=notifierId
+        optionValuePath="id"
+        optionLabelPath="displayName"
+    }}
+  </div>
+  <div class="col span-11-of-24">
+    <div class="acc-label clearfix">
+      <div class="pull-left text-capitalize">
+        {{selectedNotifier.notifierLabel}}
+      </div>
+      <div class="pull-right">
+        <a role="button" class="btn bg-transparent p-0" {{action 'toggleUseDefault'}}>
+          {{if useDefault 'Override' 'Use default'}}
+        </a>
+      </div>
+    </div>
+    {{input
+        classNames="form-control input-sm"
+        disabled=useDefault
+        placeholder=recipientPlaceholder
+        value=recipientId
+        showSearch=showSearch
+    }}
+  </div>
+  {{#unless disableRemove}}
+    <div class="col span-2-of-24" style="padding-top: 28px;">
+      <button class="btn bg-link icon-btn p-0 btn-sm" {{action "remove"}}>
+        <span class="darken"><i class="icon icon-minus text-small"/></span>
+      </button>
+    </div>
+  {{/unless}}
+</section>

@@ -25,7 +25,29 @@ export default Resource.extend({
     if (wc) {
       return 'Webhook';
     }
+    return '';
 
+  }.property('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig'),
+
+  notifierLabel: function() {
+    const sc = this.get('slackConfig');
+    const pc = this.get('pagerdutyConfig');
+    const ec = this.get('smtpConfig');
+    const wc = this.get('webhookConfig');
+
+    if (sc) {
+      return 'Slack Channel';
+    }
+    if (pc) {
+      return 'Pagerduty Service Key';
+    }
+    if (ec) {
+      return 'Email Address';
+    }
+    if (wc) {
+      return 'Webhook URL';
+    }
+    return '';
   }.property('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig'),
   availableActions: function() {
     let a = this.get('actionLinks');

@@ -1,28 +1,10 @@
-<section class="row">
-  <div class="col span-6">
-    <div class="acc-label">Notifier</div>
-    {{new-select
-      classNames="text-capitalize form-control"
-      content=recipientTypes
-      value=recipientType
-    }}
-  </div>
+{{#each newNotifiers as |notifier|}}
+  {{alert/form-notifier-item disableRemove=disableRemove remove="remove" notifiers=notifiers model=notifier}}
+{{/each}}
 
-  <div class="col span-6">
-    <div class="acc-label clearfix">
-      <div class="pull-left text-capitalize">
-        XXX{{recipientLabel}}
-      </div>
-      <div class="pull-right">
-        <a role="button" class="btn bg-transparent p-0" {{action 'showRecipientModal'}}>
-          {{t 'formRecipient.toggle.create'}}
-        </a>
-      </div>
-    </div>
-    {{input
-        placeholder=recipientPlaceholder
-        value=model.recipientId
-        showSearch=showSearch
-    }}
-  </div>
-</section>
+<div class="mt-15">
+  <button class="btn bg-link icon-btn p-0" {{action "add"}}>
+    <span class="darken"><i class="icon icon-plus text-small"/></span>
+    <span>Add Notifier</span>
+  </button>
+</div>

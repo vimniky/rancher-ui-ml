@@ -5,3 +5,18 @@
     height: 35px;
   }
 }
+
+.alert-rule-overview {
+  .content {
+    align-items: center;
+    display: flex;
+
+    ul {
+      margin-right: 20px;
+    }
+
+    li {
+      list-style-type: circle;
+    }
+  }
+}

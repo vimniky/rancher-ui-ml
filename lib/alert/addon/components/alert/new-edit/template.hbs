@@ -22,6 +22,7 @@
   <hr/>
   {{alert/form-notifier
       isCreate=isCreate
+      notifiers=notifiers
       model=model
   }}
 </div>
@@ -51,6 +52,29 @@
   </div>
 </div>
 
+<section class="box mt-20 alert-rule-overview">
+  <h2>Overview</h2>
+  <hr/>
+  <div class="content">
+    <div>
+      Send an alert to
+    </div>
+    <ul>
+      <li>
+        {{if notifierType notifierType '#notifier'}}
+      </li>
+      <li>
+        {{if notifierType notifierType '#notifier'}}
+      </li>
+      <li>
+        {{if notifierType notifierType '#notifier'}}
+      </li>
+    </ul>
+    <div>
+      When Pod <code>xxxx</code> is not running.
+    </div>
+  </div>
+</section>
 
 <div class="mt-20">
   {{top-errors errors=errors}}
