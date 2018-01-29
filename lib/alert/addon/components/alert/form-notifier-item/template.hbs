@@ -1,12 +1,15 @@
 <section class="row">
   <div class="col span-11-of-24">
     <div class="acc-label"> Notifier </div>
-    {{new-select
-        classNames="text-capitalize form-control input-sm"
+    {{log notifiers}}
+    {{searchable-select
+        classNames="text-capitalize"
         content=notifiers
         value=notifierId
         optionValuePath="id"
         optionLabelPath="displayName"
+        optionGroupPath="notifierType"
+        placeholder="Choose a Notifier"
     }}
   </div>
   <div class="col span-11-of-24">
@@ -21,7 +24,7 @@
       </div>
     </div>
     {{input
-        classNames="form-control input-sm"
+        classNames="form-control"
         disabled=useDefault
         placeholder=recipientPlaceholder
         value=recipientId
@@ -29,8 +32,8 @@
     }}
   </div>
   {{#unless disableRemove}}
-    <div class="col span-2-of-24" style="padding-top: 28px;">
-      <button class="btn bg-link icon-btn p-0 btn-sm" {{action "remove"}}>
+    <div class="col span-2-of-24" style="padding-top: 29px;">
+      <button class="btn bg-link icon-btn p-0" {{action "remove"}}>
         <span class="darken"><i class="icon icon-minus text-small"/></span>
       </button>
     </div>
