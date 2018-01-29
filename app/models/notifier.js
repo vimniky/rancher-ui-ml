@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { hasMany } from 'ember-api-store/utils/denormalize';
+import { get, set } from '@ember/object';
 import ResourceUsage from 'shared/mixins/resource-usage';
 import Resource from 'ember-api-store/models/resource';
 
@@ -29,6 +30,26 @@ export default Resource.extend({
 
   }.property('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig'),
 
+  notifierValue: function() {
+    const sc = this.get('slackConfig');
+    const pc = this.get('pagerdutyConfig');
+    const ec = this.get('smtpConfig');
+    const wc = this.get('webhookConfig');
+    if (sc) {
+      return get(sc, 'channel');
+    }
+    if (pc) {
+      return get(pc, 'serviceKey');
+    }
+    if (ec) {
+      return get(ec, 'defaultRecipient');
+    }
+    if (wc) {
+      return get(wc, 'url');
+    }
+    return '';
+
+  }.property('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig'),
   notifierLabel: function() {
     const sc = this.get('slackConfig');
     const pc = this.get('pagerdutyConfig');

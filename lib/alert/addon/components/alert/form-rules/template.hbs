@@ -28,6 +28,7 @@
           optionValuePath="id"
           optionLabelPath="name"
           placeholder="Choose a target"
+          filter=targetFilter
       }}
     {{/if}}
   </div>
@@ -37,17 +38,17 @@
       <div class="acc-label">Condition</div>
       {{new-select
           class="form-control"
-          value=podRule
-          content=podRules
+          value=newAlert.targetPod.condition
+          content=podConditions
           optionValuePath="id"
           optionLabelPath="label"
           placeholder="Choose a Rule"
       }}
     </div>
-    {{#if (eq podRule 'c')}}
+    {{#if (eq newAlert.targetPod.condition 'restarts')}}
       <div class="col span-3">
         <div class="acc-label">Times</div>
-        {{alert/form-int value=restartedTimes}}
+        {{alert/form-int value=newAlert.targetPod.restartTimes}}
       </div>
     {{/if}}
   {{else if (eq targetType 'workload')}}
@@ -55,12 +56,12 @@
       <div class="acc-label">Condition</div>
       <div class="input-group pt-5">
         {{input-slider
-            value=percent
+            value=newAlert.targetWorkload.unavailablePercentage
             valueMin=0
             valueMax=100
             step=1
         }}
-        <span class="input-group-addon">{{percent}}% are Unavailable</span>
+        <span class="input-group-addon">{{newAlert.targetWorkload.unavailablePercentage}}% are Unavailable</span>
       </div>
     </div>
   {{else}}
@@ -73,8 +74,7 @@
   <p class="text-info text-small">Workloads that match all the selectors will be selected.</p>
   {{form-key-value
       addActionLabel="alertPage.addSelectorLabel"
-      initialStr=null
-      initialMap=null
+      initialMap=newAlert.targetWorkload.selector
       initialArray=initialArray
   }}
 {{/if}}

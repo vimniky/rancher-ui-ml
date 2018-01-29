@@ -1,11 +1,10 @@
 <section class="row">
   <div class="col span-11-of-24">
     <div class="acc-label"> Notifier </div>
-    {{log notifiers}}
     {{searchable-select
         classNames="text-capitalize"
         content=notifiers
-        value=notifierId
+        value=model.notifierId
         optionValuePath="id"
         optionLabelPath="displayName"
         optionGroupPath="notifierType"
@@ -27,7 +26,7 @@
         classNames="form-control"
         disabled=useDefault
         placeholder=recipientPlaceholder
-        value=recipientId
+        value=model.recipient
         showSearch=showSearch
     }}
   </div>

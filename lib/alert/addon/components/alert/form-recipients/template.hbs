@@ -1,5 +1,10 @@
-{{#each newNotifiers as |notifier|}}
-  {{alert/form-notifier-item disableRemove=disableRemove remove="remove" notifiers=notifiers model=notifier}}
+{{#each newAlert.recipients as |recipient|}}
+  {{alert/form-recipient-item
+      disableRemove=disableRemove
+      remove="remove"
+      notifiers=notifiers
+      model=recipient
+  }}
 {{/each}}
 
 <div class="mt-15">

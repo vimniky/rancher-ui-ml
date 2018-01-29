@@ -2,38 +2,14 @@
 <hr/>
 <section class="mb-30 box">
   <div class="row">
-    <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label" for="">Host{{field-required}}</label>
+    <div class="col span-12 mt-0 pt-0">
+      <label class="acc-label" for="">Endpoint{{field-required}}</label>
       {{input
           type="text"
-          value=model.esHost
+          value=model.endpoint
           classNames="form-control"
-          placeholder="e.g. 192.168.1.10"
+          placeholder="e.g. https://your-ip:9200"
       }}
-    </div>
-    <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label" for="">Port{{field-required}}</label>
-      {{input-integer
-          class="form-control"
-          min=1
-          max=65535
-          value=model.esPort
-          placeholder="e.g. 9200"
-      }}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col span-12">
-      <label class="acc-label" for="useTLS">
-        {{input
-            type="checkbox"
-            classNames="form-control"
-            name="useTLS"
-            checked=tls
-            placeholder=""
-        }}
-        Use TLS
-      </label>
     </div>
   </div>
 </section>

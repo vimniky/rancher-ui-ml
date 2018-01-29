@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col span-12 pt-0 mt-0">
     {{form-name-description
-      name=model.name
+      name=newAlert.displayName
       nameDisabled=false
-      description=model.description
+      description=newAlert.description
       bothColClass="col span-6 mt-0"
       colClass="col span-12 mt-0"
       namePlaceholder="newContainer.name.placeholder"
@@ -17,15 +17,13 @@
       pods=pods
       workloads=workloads
       isCreate=isCreate
-      model=model
-      overviewRules=overviewData.rules
+      newAlert=newAlert
   }}
   <hr/>
-  {{alert/form-notifier
+  {{alert/form-recipients
       isCreate=isCreate
       notifiers=notifiers
-      overviewNotifiers=overviewData.notifiers
-      model=model
+      newAlert=newAlert
   }}
 </div>
 
@@ -48,9 +46,9 @@
 
   <div>
     <div><label class="acc-label">Severity</label></div>
-    <label class="mr-10 text-info">{{radio-button selection=severity value="info"}} Info</label>
-    <label class="mr-10 text-warning">{{radio-button selection=severity value="warning"}} Warning</label>
-    <label class="mr-10 text-error">{{radio-button selection=severity value="critical"}} Critical</label>
+    <label class="mr-10 text-info">{{radio-button selection=newAlert.severity value="info"}} Info</label>
+    <label class="mr-10 text-warning">{{radio-button selection=newAlert.severity value="warning"}} Warning</label>
+    <label class="mr-10 text-error">{{radio-button selection=newAlert.severity value="critical"}} Critical</label>
   </div>
 </div>
 
@@ -63,21 +61,17 @@
     </div>
     <ul>
       <li>
-        {{if notifierType notifierType '#notifier'}}
+        {{if notifierType notifierType 'Email ui@rancher.com'}}
       </li>
       <li>
-        {{if notifierType notifierType '#notifier'}}
+        {{if notifierType notifierType 'Slack xxx'}}
       </li>
       <li>
-        {{if notifierType notifierType '#notifier'}}
+        {{if notifierType notifierType 'Pagerduty xxx'}}
       </li>
     </ul>
     <div>
-      {{#if overviewData.rules.pod}}
-          When {{overviewData.rules.pod.targetType}} <code>{{overviewData.rules.pod.targetName}}</code> is not running.
-      {{else if overviewData.rules.workload}}
-          When {{overviewData.rules.workload.targetType}} <code>{{overviewData.rules.workload.targetName}}</code> is not running.
-      {{/if}}
+      When Pod <code> XXX </code> is not running.
     </div>
   </div>
 </section>
