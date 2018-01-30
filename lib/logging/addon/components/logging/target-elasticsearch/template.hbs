@@ -1,6 +1,7 @@
 <h2 class="mt-30">Elasticsearch Configuration</h2>
 <hr/>
 <div class="box">
+  {{#unless embbeded}}
   <h4>Elasticsearch Endpont</h4>
   <p class="text-info text-small">Copy your Endpoint from Elastic Cloud, or input the reachable HTTP address and port your Elacticsearch installed.</p>
   <section class="mb-30">
@@ -40,8 +41,8 @@
       </div>
     </div>
   </section>
-
-  <h4 class="mt-20">Elasticsearch Index Patterns</h4>
+  {{/unless}}
+  <h4 class="{{if embbeded '' 'mt-20'}}">Elasticsearch Index Patterns</h4>
   <p class="text-info text-small">Index patterns are used to generate Elacticsearch index</p>
   <section class="pt-0" style="border-top:0;position:relative;top:-1px;">
     <div class="row">

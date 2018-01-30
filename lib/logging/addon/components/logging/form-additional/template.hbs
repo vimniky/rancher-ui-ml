@@ -1,0 +1,28 @@
+<section class="box additional-logging-configuration-content">
+  <h4>Custom Log Fields</h4>
+  <div class="mb-30">
+    <p class="text-info text-small">You can add custom fields as key/value pairs for better filtering.</p>
+    {{form-key-value
+        addActionLabel="loggingPage.tags.addActionLabel"
+        initialMap=fields
+        changed=(action (mut fields))
+    }}
+  </div>
+  <h4>Flush Interval</h4>
+  <p class="text-info text-small">How often buffered logs would be flushed to Elasticearch </p>
+  <div class="row">
+    <div class="col span-8">
+      <span class="acc-label">Flush Interval</span>
+      <div class="input-group">
+        {{input-integer
+            min=1
+            value=flushInterval
+            class="form-control"
+            placeholder="e.g. 1"
+            aria-describedby="basic-addon2"
+        }}
+        <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
+      </div>
+    </div>
+  </div>
+</section>
