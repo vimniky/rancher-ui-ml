@@ -3,7 +3,7 @@
 <div class="box">
   {{#unless embbeded}}
   <h4>Elasticsearch Endpont</h4>
-  <p class="text-info text-small">Copy your Endpoint from Elastic Cloud, or input the reachable HTTP address and port your Elacticsearch installed.</p>
+  <p class="text-info text-small">Copy your endpoint from Elastic Cloud, or input the reachable endpoint of your self-hosted Elacticsearch.</p>
   <section class="mb-30">
     <div>
       <label class="acc-label" for="">Endpoint{{field-required}}</label>
@@ -11,18 +11,18 @@
           type="text"
           value=model.endpoint
           classNames="form-control"
-          placeholder="e.g. https://ip:port"
+          placeholder="e.g. https://192.168.1.10:9200"
       }}
     </div>
   </section>
   <h4>Elasticsearch X-Pack Security <span class="text-muted">(Optional)</span></h4>
   <section>
     <p class="text-info text-small">
-      If your elasticsearch use X-Pack built-in native authentication features, put your username and password below.
+      If your Elasticsearch use X-Pack built-in native authentication features, put your username and password below.
     </p>
     <div class="row">
       <div class="col span-6">
-        <label class="acc-label" for="">User Name</label>
+        <label class="acc-label" for="">Username</label>
         {{input
             type="text"
             value=model.esAuthUser

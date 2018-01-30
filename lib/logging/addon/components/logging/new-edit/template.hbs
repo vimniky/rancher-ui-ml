@@ -19,15 +19,14 @@
 {{#if (eq targetType 'embedded')}}
   <div class="banner bg-warning">
     <div class="banner-icon p-20"><i class="icon icon-alert"></i></div>
-    <div class="banner-message p-20">
-      Embedded log is experimental, no persistent storage will be provided.
+    <div class="banner-message p-10">
+      <ul>
+        <li style="list-style: circle;">
+      Embedded Elasticsearch is experimental, no persistent storage will be provided.
+        </li>
+        <li style="list-style: circle;">The embedded deployment includes ElasticSearch and Kibana. Elasticsearch requests at least 2 CPU and 4G MEM available on the node it is deployed.</li>
+      </ul>
     </div>
-  </div>
-  <div class="box">
-    <h3>Cluster requirements:</h3>
-    <ul>
-      <li>The embedded deployment includes ElasticSearch and Kibana which requests at least 2 CPU and 4G MEM available on the node.</li>
-    </ul>
   </div>
 {{/if}}
 
