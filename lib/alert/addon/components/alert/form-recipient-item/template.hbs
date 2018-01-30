@@ -11,14 +11,15 @@
         placeholder="Choose a Notifier"
     }}
   </div>
+
   <div class="col span-11-of-24">
     <div class="acc-label clearfix">
       <div class="pull-left text-capitalize">
-        {{selectedNotifier.notifierLabel}}
+        {{if selectedNotifier.notifierLabel selectedNotifier.notifierLabel 'Receiver'}}
       </div>
       <div class="pull-right">
         <a role="button" class="btn bg-transparent p-0" {{action 'toggleUseDefault'}}>
-          {{if useDefault 'Override' 'Use default'}}
+          {{if useDefault 'Override' 'Use Default'}}
         </a>
       </div>
     </div>
@@ -30,11 +31,10 @@
         showSearch=showSearch
     }}
   </div>
-  {{#unless disableRemove}}
-    <div class="col span-2-of-24" style="padding-top: 29px;">
-      <button class="btn bg-link icon-btn p-0" {{action "remove"}}>
-        <span class="darken"><i class="icon icon-minus text-small"/></span>
-      </button>
-    </div>
-  {{/unless}}
+
+  <div class="col span-2-of-24" style="padding-top: 29px;">
+    <button class="btn bg-link icon-btn p-0 {{if disableRemove 'disabled' ''}}" {{action "remove"}}>
+      <span class="darken"><i class="icon icon-minus text-small"/></span>
+    </button>
+  </div>
 </section>

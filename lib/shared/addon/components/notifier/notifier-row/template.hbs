@@ -8,13 +8,17 @@
   {{badge-state model=model}}
 </td>
 
-<td data-title="{{dt.name}}" >
-  {{model.name}}
-</td>
-
-<td data-title="{{dt.type}}" class="clip">
+<td data-title="{{dt.type}}" class="clip text-capitalize">
   {{model.notifierType}}
 </td>
+
+<td data-title="{{dt.name}}" >
+  {{model.displayName}}
+  {{#if showNotifierValue}}
+    <div class="text-muted text-small">{{model.notifierValue}}</div>
+  {{/if}}
+</td>
+
 <td data-title="{{dt.created}}" class="clip">
   {{model.created}}
 </td>

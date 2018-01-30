@@ -15,12 +15,14 @@
 <div class="box mt-20">
   {{alert/form-rules
       pods=pods
+      pageScope=pageScope
       workloads=workloads
       isCreate=isCreate
       newAlert=newAlert
   }}
   <hr/>
   {{alert/form-recipients
+      pageScope=pageScope
       isCreate=isCreate
       notifiers=notifiers
       newAlert=newAlert
@@ -59,19 +61,22 @@
     <div>
       Send an alert to
     </div>
-    <ul>
-      <li>
-        {{if notifierType notifierType 'Email ui@rancher.com'}}
-      </li>
-      <li>
-        {{if notifierType notifierType 'Slack xxx'}}
-      </li>
-      <li>
-        {{if notifierType notifierType 'Pagerduty xxx'}}
-      </li>
+    <ul class="text-muted">
+      {{#each newAlert.recipients as |r|}}
+        <li>
+          {{if r.notifierType r.notifierType 'Missing'}} {{if r.recipient r.recipient 'Missing'}}
+        </li>
+      {{/each}}
     </ul>
     <div>
-      When Pod <code> XXX </code> is not running.
+      When
+      <span class="text-capitalize">
+        {{if newAlert.targetType newAlert.targetType 'Missing'}}
+      </span>
+      <span class="text-muted">
+        {{if newAlert.targetName newAlert.targetName 'Missing'}}
+      </span>
+      is not running.
     </div>
   </div>
 </section>

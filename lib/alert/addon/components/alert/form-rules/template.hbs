@@ -6,7 +6,7 @@
         disabled=(not isCreate)
         class="form-control text-capitalize"
         content=targetTypes
-        value=targetType
+        value=newAlert.targetType
     }}
   </div>
   <div class="col span-3">
@@ -33,7 +33,7 @@
     {{/if}}
   </div>
 
-  {{#if (eq targetType 'pod')}}
+  {{#if (eq newAlert.targetType 'pod')}}
     <div class="col span-3">
       <div class="acc-label">Condition</div>
       {{new-select
@@ -51,7 +51,7 @@
         {{alert/form-int value=newAlert.targetPod.restartTimes}}
       </div>
     {{/if}}
-  {{else if (eq targetType 'workload')}}
+  {{else if (eq newAlert.targetType 'workload')}}
     <div class="col span-5">
       <div class="acc-label">Condition</div>
       <div class="input-group pt-5">
@@ -61,7 +61,7 @@
             valueMax=100
             step=1
         }}
-        <span class="input-group-addon">{{newAlert.targetWorkload.unavailablePercentage}}% are Unavailable</span>
+        <span class="input-group-addon">{{newAlert.targetWorkload.unavailablePercentage}}% are unavailable</span>
       </div>
     </div>
   {{else}}
@@ -69,7 +69,7 @@
   {{/if}}
 </div>
 
-{{#if (and showWorkloadSelectors (eq targetType 'workload'))}}
+{{#if (and showWorkloadSelectors (eq newAlert.targetType 'workload'))}}
   <hr/>
   <p class="text-info text-small">Workloads that match all the selectors will be selected.</p>
   {{form-key-value

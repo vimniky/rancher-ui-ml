@@ -1,6 +1,5 @@
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { hasMany } from 'ember-api-store/utils/denormalize';
 import { get, set } from '@ember/object';
 import ResourceUsage from 'shared/mixins/resource-usage';
 import Resource from 'ember-api-store/models/resource';
@@ -15,16 +14,16 @@ export default Resource.extend({
     const wc = this.get('webhookConfig');
 
     if (sc) {
-      return 'Slack';
+      return 'slack';
     }
     if (pc) {
-      return 'Pagerduty';
+      return 'pagerduty';
     }
     if (ec) {
-      return 'Email';
+      return 'email';
     }
     if (wc) {
-      return 'Webhook';
+      return 'webhook';
     }
     return '';
 
@@ -39,7 +38,8 @@ export default Resource.extend({
       return get(sc, 'channel');
     }
     if (pc) {
-      return get(pc, 'serviceKey');
+      // return get(pc, 'serviceKey');
+      return '***';
     }
     if (ec) {
       return get(ec, 'defaultRecipient');
@@ -50,6 +50,7 @@ export default Resource.extend({
     return '';
 
   }.property('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig'),
+
   notifierLabel: function() {
     const sc = this.get('slackConfig');
     const pc = this.get('pagerdutyConfig');
@@ -68,39 +69,40 @@ export default Resource.extend({
     if (wc) {
       return 'Webhook URL';
     }
-    return '';
+    return 'Notifier';
   }.property('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig'),
+
   availableActions: function() {
     let a = this.get('actionLinks');
     let l = this.get('links');
-    const choices = [
-      {
-        label: 'action.activate',
-        icon: 'icon icon-play',
-        action: 'activate',
-        enabled: !!a.activate,
-        bulkable: true,
-      },
-      {
-        label: 'action.deactivate',
-        icon: 'icon icon-pause',
-        action: 'deactivate',
-        enabled: !!a.deactivate,
-        bulkable: true,
-      },
+    return [
+      // {
+      //   label: 'action.activate',
+      //   icon: 'icon icon-play',
+      //   action: 'activate',
+      //   enabled: !!a.activate,
+      //   bulkable: true,
+      // },
+      // {
+      //   label: 'action.deactivate',
+      //   icon: 'icon icon-pause',
+      //   action: 'deactivate',
+      //   enabled: !!a.deactivate,
+      //   bulkable: true,
+      // },
       {divider: true },
       {
         label: 'action.edit',
         icon: 'icon icon-edit',
         action: 'edit',
-        // enabled: !!l.update,
+        enabled: !!l.update,
         enabled: true,
       },
       {
         label: 'action.clone',
         icon: 'icon icon-clone',
         action: 'clone',
-        // enabled: !!l.update,
+        icon: 'icon icon-copy',
         enabled: true,
       },
       {divider: true},
@@ -119,6 +121,5 @@ export default Resource.extend({
         enabled: true
       },
     ];
-    return choices;
   }.property('actionLinks.{activate,deactivate}','links.{update,remove}'),
 });

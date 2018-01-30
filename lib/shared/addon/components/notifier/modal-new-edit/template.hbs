@@ -79,6 +79,7 @@
       <div class="col span-6">
         <div class="acc-label text-capitalize">Smtp Password</div>
         {{input
+            type="password"
             classNames="form-control"
             value=model.emailConfig.smtpPassword
             placeholder=""
@@ -154,9 +155,9 @@
     <h3>Don't know How to create a Pagerduty service key?</h3>
     <ol>
       <li>Click <a role="button" class="btn pl-0 btn-sm bg-transparent" target="_blank" rel="nofollow noreferer" href="https://www.pagerduty.com">here</a>to go to the pagerduty website. If you haven't logined yet, please login first.</li>
-      <li>After logined, navigate to Configuration > Service to go to the Services pages.</li>
-      <li>If you want to use existing service, go to the detail page. If you want to create a new service, Click "Add New Service".</li>
-      <li>In the detailed service page, click Integrations.  You can click New Integration to add new key or use the key for existing integration.</li>
+      <li>After logined, navigate to<span class="text-muted ml-10 mr-10">Configuration > Service</span>to go to the Services pages.</li>
+      <li>If you want to use existing service, go to the detail page. If you want to create a new service, Click<span class="text-muted ml-10 mr-10">Add New Service</span></li>
+      <li>In the detailed service page, click Integrations. You can click<span class="text-muted ml-10 mr-10">New Integration</span>to add new key or use the key for existing integration.</li>
     </ol>
   </div>
 {{/if}}
