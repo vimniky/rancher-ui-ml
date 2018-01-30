@@ -1436,7 +1436,7 @@ loggingPage:
   tags:
     keyPlaceholder: e.g. foo
     valuePlaceholder: e.g. bar
-    addActionLabel: Add Tag
+    addActionLabel: Add Field
   keyValueForm:
     keyPlaceholder: e.g. 192.168.1.10
   targetKafka:

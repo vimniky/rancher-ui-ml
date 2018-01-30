@@ -1,3 +1,4 @@
+{{log fields}}
 <section class="header clearfix">
   <h1 class="pull-left text-capitalize">{{pageScope}} Logging</h1>
 </section>
@@ -31,7 +32,38 @@
 {{/if}}
 
 {{#if (eq targetType 'elasticsearch')}}
-  {{logging/target-elasticsearch model=model tags=tags}}
+
+  {{#logging/target-elasticsearch model=model fields=fields}}
+    <section class="box additional-logging-configuration-content">
+      <h4>Custom Log Fields</h4>
+      <div class="mb-30">
+        <p class="text-info text-small">You can add custom fields as key/value pairs for better filtering.</p>
+        {{form-key-value
+            addActionLabel="loggingPage.tags.addActionLabel"
+            initialArray=fileds
+            changed=(action (mut fields))
+        }}
+      </div>
+      <h4>Flush Interval</h4>
+      <p class="text-info text-small">How often buffered logs would be flushed to Elasticearch </p>
+      <div class="row">
+        <div class="col span-8">
+          <span class="acc-label">Flush Interval</span>
+          <div class="input-group">
+            {{input-integer
+                min=1
+                value=flushInterval
+                class="form-control"
+                placeholder="e.g. 1"
+                aria-describedby="basic-addon2"
+            }}
+            <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{/logging/target-elasticsearch}}
+
 {{else if (eq targetType 'embedded')}}
   <!-- {{#if isClusterLevel}}
        {{logging/target-embedded model=model}}
@@ -44,56 +76,6 @@
   {{logging/target-syslog model=model}}
 {{/if}}
 
-{{#if (and (not showAdvanced) (not-eq targetType 'none'))}}
-  <div class="clearfix">
-    <div class="pull-right text-small">
-      <a role="button" class="btn bg-transparent p-0" {{action "toggleAdvanced"}}>Show advanced options</a>
-    </div>
-  </div>
-{{/if}}
-
-{{#if (and showAdvanced (not-eq targetType 'none'))}}
-  <section class="box mt-20">
-    <div class="row">
-      <p class="text-info text-small mt-0">
-        Tags are key/value pair used to filter logs
-      </p>
-      <div class="col span-12">
-        {{form-key-value
-            addActionLabel="loggingPage.tags.addActionLabel"
-        }}
-      </div>
-    </div>
-
-    <hr/>
-
-    <div class="row">
-      <div class="col span-4">
-        <span class="acc-label">Flush Interval</span>
-        <div class="input-group">
-          {{input-integer
-              min=1
-              value=flushInterval
-              class="form-control"
-              placeholder="e.g. 1"
-              aria-describedby="basic-addon2"
-          }}
-          <span class="input-group-addon bg-default" id="basic-addon2">sec</span>
-        </div>
-        <p class="text-info text-small"> How often buffered logs would be flushed to Elasticearch </p>
-      </div>
-    </div>
-  </section>
-{{/if}}
-
-{{#if showPreview}}
-  <div class="over-hr mt-40"><span {{action "togglePreview"}}>preview <i class="icon {{if previewOpen 'icon-chevron-up' 'icon-chevron-down'}}"></i></span></div>
-
-  {{#if previewOpen}}
-    <h3 class="text-muted">With the current configuration, the generated log looks like:</h3>
-    {{code-block language="yaml" code=logPreview}}
-  {{/if}}
-{{/if}}
 
 {{top-errors errors=errors}}
 {{save-cancel cancelDisabled=true editing=true save="save"}}

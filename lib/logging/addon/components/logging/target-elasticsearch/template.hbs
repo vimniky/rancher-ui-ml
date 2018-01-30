@@ -1,35 +1,24 @@
-<h4 class="pt-30">Elasticsearch Configuration</h4>
+<h2 class="mt-30">Elasticsearch Configuration</h2>
 <hr/>
-<section class="mb-30 box">
-  <div class="row">
-    <div class="col span-12 mt-0 pt-0">
+<div class="box">
+  <h4>Elasticsearch Endpont</h4>
+  <p class="text-info text-small">Copy your Endpoint from Elastic Cloud, or input the reachable HTTP address and port your Elacticsearch installed.</p>
+  <section class="mb-30">
+    <div>
       <label class="acc-label" for="">Endpoint{{field-required}}</label>
       {{input
           type="text"
           value=model.endpoint
           classNames="form-control"
-          placeholder="e.g. https://your-ip:9200"
+          placeholder="e.g. https://ip:port"
       }}
     </div>
-  </div>
-</section>
-
-{{#accordion-list classNames="mt-30" as | al expandFn |}}
-  {{logging/form-index-pattern
-      classNames="accordion-wrapper"
-      model=model
-      originalModel=originalModel
-      expandAll=al.expandAll
-      defaultPrefix=defaultPrefix
-      expandFn=expandFn
-  }}
-  {{#accordion-list-item
-       title="Elasticsearch X-Pack Security option"
-       detail="If your elasticsearch use X-Pack built-in native authentication features, put your username and password below."
-       showStatus=false
-       expandAll=al.expandAll
-       expand=(action expandFn)
-  }}
+  </section>
+  <h4>Elasticsearch X-Pack Security <span class="text-muted">(Optional)</span></h4>
+  <section>
+    <p class="text-info text-small">
+      If your elasticsearch use X-Pack built-in native authentication features, put your username and password below.
+    </p>
     <div class="row">
       <div class="col span-6">
         <label class="acc-label" for="">User Name</label>
@@ -43,12 +32,55 @@
       <div class="col span-6">
         <label class="acc-label">Password</label>
         {{input
-            type="text"
+            type="password"
             value=model.esAuthPassword
             classNames="form-control"
-            placeholder="e.g. xxx"
+            placeholder="Your Password"
         }}
       </div>
     </div>
-  {{/accordion-list-item}}
-{{/accordion-list}}
+  </section>
+
+  <h4 class="mt-20">Elasticsearch Index Patterns</h4>
+  <p class="text-info text-small">Index patterns are used to generate Elacticsearch index</p>
+  <section class="pt-0" style="border-top:0;position:relative;top:-1px;">
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">Prefix{{field-required}}</label>
+        {{input
+            type="text"
+            value=model.esLogstashPrefix
+            className="form-control"
+            placeholder="e.g. logstash"
+        }}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label" for="">Date Format</label>
+        {{new-select
+            htmlSafe=false
+            class="form-control mb-15"
+            className="form-control"
+            content=dateFormats
+            localizedLabel=false
+            value=model.esLogstashDateformat
+        }}
+      </div>
+    </div>
+    <div>
+      The generated index will be: <code class="text-italic">{{esIndex}}</code>
+    </div>
+  </section>
+</div>
+
+<main class="row mt-20">
+  <div class="col span-6 logging-format">
+    <h2 class="mt-0">Elasticsearch Log Format Preview</h2>
+    <hr/>
+    {{code-block language="yaml" code=logPreview}}
+  </div>
+  <div class="col span-6">
+    <h2 class="mt-0">Additional Logging Configuration</h2>
+    <hr/>
+    {{yield}}
+  </div>
+</main>
