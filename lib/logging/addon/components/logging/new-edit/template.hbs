@@ -1,4 +1,3 @@
-{{log fields}}
 <section class="header clearfix">
   <h1 class="pull-left text-capitalize">{{pageScope}} Logging</h1>
 </section>
@@ -31,28 +30,28 @@
 {{/if}}
 
 {{#if (eq targetType 'elasticsearch')}}
-
   {{logging/target-elasticsearch
+       targetType=targetType
        model=model
        fields=fields
-       flushInterval=flushInterval
+       flushInterval=model.flushInterval
   }}
 
 {{else if (eq targetType 'embedded')}}
   {{#if isClusterLevel}}
-    {{logging/target-elasticsearch
+    {{logging/target-embedded
         model=model
         fields=fields
-        flushInterval=flushInterval
-        embbeded=true
+        targetType=targetType
+        flushInterval=model.flushInterval
     }}
   {{/if}}
 {{else if (eq targetType 'splunk')}}
-  {{logging/target-splunk model=model fields=fields}}
+  {{logging/target-splunk flushInterval=model.flushInterval model=model fields=fields}}
 {{else if (eq targetType 'kafka')}}
-  {{logging/target-kafka model=model fields=fields}}
+  {{logging/target-kafka flushInterval=model.flushInterval model=model fields=fields}}
 {{else if (eq targetType 'syslog')}}
-  {{logging/target-syslog model=model fields=fields}}
+  {{logging/target-syslog flushInterval=model.flushInterval model=model fields=fields}}
 {{/if}}
 
 

@@ -1,13 +1,12 @@
 <h2 class="mt-30">Elasticsearch Configuration</h2>
 <hr/>
 <div class="box">
-  {{#unless embbeded}}
   <section class="mb-30">
     <div>
       <label class="acc-label" for="">Endpoint{{field-required}}</label>
       {{input
           type="text"
-          value=model.endpoint
+          value=config.endpoint
           classNames="form-control"
           placeholder="e.g. https://192.168.1.10:9200"
       }}
@@ -24,7 +23,7 @@
         <label class="acc-label" for="">Username</label>
         {{input
             type="text"
-            value=model.esAuthUser
+            value=config.authUsername
             classNames="form-control"
             placeholder="e.g. username"
         }}
@@ -33,15 +32,14 @@
         <label class="acc-label">Password</label>
         {{input
             type="password"
-            value=model.esAuthPassword
+            value=config.authPassword
             classNames="form-control"
             placeholder="Your Password"
         }}
       </div>
     </div>
   </section>
-  {{/unless}}
-  <h4 class="{{if embbeded '' 'mt-20'}}">Index Patterns</h4>
+  <h4 class="mt-20">Index Patterns</h4>
   <p class="text-info text-small">Index patterns are used to generate Elacticsearch index</p>
   <section class="pt-0" style="border-top:0;position:relative;top:-1px;">
     <div class="row">
@@ -49,7 +47,7 @@
         <label class="acc-label">Prefix{{field-required}}</label>
         {{input
             type="text"
-            value=model.esLogstashPrefix
+            value=config.indexPrefix
             className="form-control"
             placeholder="e.g. logstash"
         }}
@@ -57,9 +55,9 @@
       <div class="col span-6">
         <div style="margin-top: 34px;">
           <label>Date Format: </label>
-          <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY-MM-DD"}} YYYY-MM-DD</label>
-          <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY-MM"}} YYY-MMM</label>
-          <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY"}} YYYY</label>
+          <label class="mr-10">{{radio-button selection=dateFormat value="YYYY-MM-DD"}} YYYY-MM-DD</label>
+          <label class="mr-10">{{radio-button selection=dateFormat value="YYYY-MM"}} YYY-MMM</label>
+          <label class="mr-10">{{radio-button selection=dateFormat value="YYYY"}} YYYY</label>
         </div>
       </div>
     </div>

@@ -1,6 +1,43 @@
-<div class="banner bg-warning">
-  <div class="banner-icon p-20"><i class="icon icon-alert"></i></div>
-  <div class="banner-message p-20">
-    We will collect the standard output and standard error output for each container, the log files which under path<code> /var/log/containers/ </code>on each host. The log will be routed to the target you choosed below.
-  </div>
+<h2 class="mt-30">Embedded Elasticsearch Configuration</h2>
+<hr/>
+  <h4>Index Patterns</h4>
+  <p class="text-info text-small">Index patterns are used to generate Elacticsearch index</p>
+  <section class="pt-0" style="border-top:0;position:relative;top:-1px;">
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">Prefix{{field-required}}</label>
+        {{input
+            type="text"
+            value=config.indexPrefix
+            className="form-control"
+            placeholder="e.g. logstash"
+        }}
+      </div>
+      <div class="col span-6">
+        <div style="margin-top: 34px;">
+          <label>Date Format: </label>
+          <label class="mr-10">{{radio-button selection=dateFormat value="YYYY-MM-DD"}} YYYY-MM-DD</label>
+          <label class="mr-10">{{radio-button selection=dateFormat value="YYYY-MM"}} YYY-MMM</label>
+          <label class="mr-10">{{radio-button selection=dateFormat value="YYYY"}} YYYY</label>
+        </div>
+      </div>
+    </div>
+    <div>
+      The generated index will be: <code class="text-italic">{{esIndex}}</code>
+    </div>
+  </section>
 </div>
+
+<main class="row mt-20">
+  <div class="col span-6 logging-format">
+    <h2 class="mt-0">Log Format Preview</h2>
+    <hr/>
+    {{code-block language="yaml" code=logPreview}}
+  </div>
+  <div class="col span-6">
+    {{logging/form-additional
+        fields=fields
+        flushInterval=flushInterval
+    }}
+  </div>
+</main>
