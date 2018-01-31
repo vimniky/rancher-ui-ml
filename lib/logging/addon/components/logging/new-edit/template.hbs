@@ -32,15 +32,20 @@
 
 {{#if (eq targetType 'elasticsearch')}}
 
-  {{#logging/target-elasticsearch model=model fields=fields}}
-    {{logging/form-additional flushInterval=flushInterval fields=fields}}
-  {{/logging/target-elasticsearch}}
+  {{logging/target-elasticsearch
+       model=model
+       fields=fields
+       flushInterval=flushInterval
+  }}
 
 {{else if (eq targetType 'embedded')}}
   {{#if isClusterLevel}}
-    {{#logging/target-elasticsearch embbeded=true model=model fields=fields}}
-      {{logging/form-additional flushInterval=flushInterval fields=fields}}
-    {{/logging/target-elasticsearch}}
+    {{logging/target-elasticsearch
+        model=model
+        fields=fields
+        flushInterval=flushInterval
+        embbeded=true
+    }}
   {{/if}}
 {{else if (eq targetType 'splunk')}}
   {{logging/target-splunk model=model}}

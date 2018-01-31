@@ -2,8 +2,6 @@
 <hr/>
 <div class="box">
   {{#unless embbeded}}
-  <h4>Elasticsearch Endpont</h4>
-  <p class="text-info text-small">Copy your endpoint from Elastic Cloud, or input the reachable endpoint of your self-hosted Elacticsearch.</p>
   <section class="mb-30">
     <div>
       <label class="acc-label" for="">Endpoint{{field-required}}</label>
@@ -14,8 +12,9 @@
           placeholder="e.g. https://192.168.1.10:9200"
       }}
     </div>
+  <p class="text-info text-small">Copy your endpoint from Elastic Cloud, or input the reachable endpoint of your self-hosted Elacticsearch.</p>
   </section>
-  <h4>Elasticsearch X-Pack Security <span class="text-muted">(Optional)</span></h4>
+  <h4>X-Pack Security <span class="text-muted">(Optional)</span></h4>
   <section>
     <p class="text-info text-small">
       If your Elasticsearch use X-Pack built-in native authentication features, put your username and password below.
@@ -42,7 +41,7 @@
     </div>
   </section>
   {{/unless}}
-  <h4 class="{{if embbeded '' 'mt-20'}}">Elasticsearch Index Patterns</h4>
+  <h4 class="{{if embbeded '' 'mt-20'}}">Index Patterns</h4>
   <p class="text-info text-small">Index patterns are used to generate Elacticsearch index</p>
   <section class="pt-0" style="border-top:0;position:relative;top:-1px;">
     <div class="row">
@@ -75,13 +74,14 @@
 
 <main class="row mt-20">
   <div class="col span-6 logging-format">
-    <h2 class="mt-0">Elasticsearch Log Format Preview</h2>
+    <h2 class="mt-0">Log Format Preview</h2>
     <hr/>
     {{code-block language="yaml" code=logPreview}}
   </div>
   <div class="col span-6">
-    <h2 class="mt-0">Additional Logging Configuration</h2>
-    <hr/>
-    {{yield}}
+    {{logging/form-additional
+        fields=fields
+        flushInterval=flushInterval
+    }}
   </div>
 </main>
