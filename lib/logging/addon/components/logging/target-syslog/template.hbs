@@ -6,7 +6,7 @@
       <label class="acc-label" for="">Endpoint{{field-required}}</label>
       {{input
           type="text"
-          value=config.zookeeperEndpoint
+          value=config.endpoint
           classNames="form-control"
           placeholder="e.g. https://192.168.1.10:2181"
       }}
@@ -19,7 +19,7 @@
       <label class="acc-label" for="">Program</label>
       {{input
           type="text"
-          value=model.syslogConfig.program
+          value=config.program
           classNames="form-control"
           placeholder="Your program"
       }}
@@ -29,8 +29,8 @@
 
   <div>
     Log Severity:
-    {{#each severities as |s|}}
-        <label class="mr-10 text-capitalize">{{radio-button selection=config.severity value=s }} {{s}}</label>
+    {{#each severities as |item|}}
+        <label class="mr-10 text-capitalize">{{radio-button selection=config.severity value=item.value }} {{item.label}}</label>
     {{/each}}
     <p class="text-info text-small">The severity of logs, list of severities definition could be found here <a href="https://tools.ietf.org/html/rfc5424#section-6.2.1" target="_blank">here.</a></p>
   </div>
