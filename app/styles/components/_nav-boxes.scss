@@ -1,7 +1,58 @@
 .logging-targets {
+  .nav-box-item {
+    position: relative;
+  }
+  .badge-rancher {
+    position: absolute;
+    z-index: 1;
+    background: $warning;
+    color: black;
+    padding: 1px 10px;
+    right: -13px;
+    top: 5px;
+    font-size: .75em;
+    color: white;
+
+    &:before {
+      content: "";
+      border-style: solid;
+      border-color: $warning;
+      border-left-color: transparent;
+      position: absolute;
+      top: 0;
+      left: -16px;
+      border-width: 11.5px;
+      z-index: 2;
+    }
+
+    &:after {
+      content: "";
+      border-color: darken($warning, 20%) transparent transparent darken($warning, 20%);
+      border-style: solid;
+      border-width: 5px;
+      right: 2px;
+      bottom: -10px;
+      display: block;
+      position: absolute;
+    }
+  }
+  .badge-thirdparty {
+    @extend .badge-rancher;
+    background-color: $info;
+
+    &:before {
+      border-color: $info;
+      border-left-color: transparent;
+    }
+
+    &:after {
+      border-color: darken($info, 30%) transparent transparent darken($info, 30%);
+    }
+  }
+
   .none {
     background-image: url('images/providers/none.svg');
-    background-size: 120px 70px;
+    background-size: 180px 110px;
   }
   .elasticsearch {
     background-image: url('images/providers/elasticsearch.svg');
@@ -10,19 +61,19 @@
   }
   .splunk {
     background-image: url('images/providers/splunk.svg');
-    background-size: 150px 80px;
+    background-size: 160px 90px;
   }
   .embedded {
-    background-image: url('images/logos/main.svg');
-    background-size: 110px 70px;
+    background-image: url('images/providers/elasticsearch-embedded.svg');
+    background-size: 150px 110px;
     background-position: center 30%!important;
   }
   .kafka {
     background-image: url('images/providers/kafka.svg');
-    background-size: 120px 80px;
+    background-size: 130px 80px;
   }
   .syslog {
-    background-image: url('images/providers/syslog.png');
+    background-image: url('images/providers/syslog.svg');
     background-size: 150px 120px;
   }
 }

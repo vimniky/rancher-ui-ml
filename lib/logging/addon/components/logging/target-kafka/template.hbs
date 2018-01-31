@@ -1,91 +1,76 @@
-<h4 class="pt-30">Kafka Configuration</h4>
+<h2 class="pt-30">Kafka Configuration</h2>
 <hr/>
 
-<div class="box mb-10 clearfix">
-
-  <div class="row">
-    <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label" for="">Broker Type</label>
-      {{new-select
-          class="form-control text-capitalize"
-          content=brokerTypes
-          value=model.kafkaBrokerType
-          classNames="form-control"
-      }}
-      <p class="text-info text-small"> You can choose either brokers or zookeeper KafkaBrokers </p>
-    </div>
+<div class="box mb-10">
+  <div>
+    Entrypoint:
+    <label class="mr-10">{{radio-button selection=config.brokerType value="zookeeper"}} Zookeeper</label>
+    <label class="mr-10">{{radio-button selection=config.brokerType value="broker"}} Broker</label>
+    <p class="text-info text-small">Use either Zookeeper or Broker list as the Kafka connection entrypoint.</p>
   </div>
   <hr/>
-  {{#if (eq model.kafkaBrokerType 'zookeeper')}}
-    <p class="text-info text-small mb-0">
-      Zookeeper is for building coordination, configuration management, leader detection, detecting node update in kafka cluster.
-    </p>
-    <div class="row">
-      <div class="col span-6">
-        <label class="acc-label" for="">Host</label>
-        {{input
-            type="text"
-            value=model.kafkaZookeeperHost
-            classNames="form-control"
-            placeholder="e.g. 192.168.1.10"
-        }}
-      </div>
-      <div class="col span-6">
-        <label class="acc-label" for="">Port</label>
-        {{input
-            type="text"
-            value=model.kafkaZookeeperPort
-            classNames="form-control"
-            placeholder="e.g. 8088"
-        }}
-      </div>
+  <section class="mb-30">
+  {{#if (eq config.brokerType 'zookeeper')}}
+    <div>
+      <label class="acc-label" for="">Endpoint{{field-required}}</label>
+      {{input
+          type="text"
+          value=config.zookeeperEndpoint
+          classNames="form-control"
+          placeholder="e.g. https://192.168.1.10:2181"
+      }}
     </div>
+    <p class="text-info text-small mb-0">Zookeeper is for building coordination, configuration management, leader detection, detecting node update in kafka cluster.</p>
   {{else}}
+    {{#each config.brokerEndpoints as |item|}}
+      <div class="row">
+        <div class="col span-11">
+          <label class="acc-label" for="">Endpoint{{field-required}}</label>
+          {{input
+              type="text"
+              value=item.endpoint
+              classNames="form-control"
+              placeholder="e.g. https://192.168.1.10:9092"
+          }}
+        </div>
+        <div class="col span-1" style="padding-top: 29px">
+          <button class="btn bg-primary icon-btn" {{action "remove" item}}>
+            <span class="darken"><i class="icon icon-minus"></i></span>
+          </button>
+        </div>
+      </div>
+    {{/each}}
     <p class="text-info text-small mb-0">A Kafka cluster consists of one or more Brokers, config the host and port for each Broker. </p>
-    {{form-key-value
-        keyLabel="loggingPage.targetKafka.host"
-        valueLabel="loggingPage.targetKafka.port"
-        addActionLabel="loggingPage.targetKafka.addActionLabel"
-        keyPlaceholder="loggingPage.targetKafka.host"
-        valuePlaceholder="loggingPage.targetKafka.addActionLabel"
-    }}
+    <div class="mt-20">
+      <button class="btn bg-link icon-btn p-0" {{action "add"}}>
+        <span class="darken"><i class="icon icon-plus text-small"/></span>
+        <span>Add Endpoint</span>
+      </button>
+    </div>
   {{/if}}
-</div>
-
-<section class="box">
-  <div class="row mt-20">
+  </section>
+  <hr/>
+  <div class="row">
     <div class="col span-6 mt-0 pt-0">
       <label class="acc-label" for="">Topic{{field-required}}</label>
       {{input
           type="text"
-          value=model.kafkaTopic
+          value=config.kafkaTopic
           classNames="form-control"
           placeholder="e.g. message"
       }}
-      <p class="text-info text-small">Kafka categories for messages. They could be something like kubernetelogs or dockerlogs. </p>
-    </div>
-
-    <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label" for="">Output Data Type</label>
-      {{new-select
-          class="form-control text-capitalize"
-          content=outputDataTypes
-          value=model.kafkaOutputDataType
-          classNames="form-control"
-      }}
+      <p class="text-info text-small">Logs will be send to this topic.</p>
     </div>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label">Max Send Retires</label>
-      {{input-integer
-          class="form-control"
-          min=1
-          value=kafkaMaxSendRetries
-          placeholder="e.g. 1"
-      }}
-      <p class="text-info text-small">The number of times to retry sending of messages to a leader. </p>
-    </div>
+<main class="row mt-20">
+  <div class="col span-6 logging-format">
+    <h2 class="mt-0">Log Format Preview</h2>
+    <hr/>
+    {{code-block language="yaml" code=logPreview}}
   </div>
-</section>
+  <div class="col span-6">
+    {{logging/form-additional flushInterval=flushInterval fields=fields}}
+  </div>
+</main>

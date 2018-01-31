@@ -12,7 +12,7 @@
           placeholder="e.g. https://192.168.1.10:9200"
       }}
     </div>
-  <p class="text-info text-small">Copy your endpoint from Elastic Cloud, or input the reachable endpoint of your self-hosted Elacticsearch.</p>
+    <p class="text-info text-small">Copy your endpoint from Elastic Cloud, or input the reachable endpoint of your self-hosted Elacticsearch.</p>
   </section>
   <h4>X-Pack Security <span class="text-muted">(Optional)</span></h4>
   <section>
@@ -55,15 +55,12 @@
         }}
       </div>
       <div class="col span-6">
-        <label class="acc-label" for="">Date Format</label>
-        {{new-select
-            htmlSafe=false
-            class="form-control mb-15"
-            className="form-control"
-            content=dateFormats
-            localizedLabel=false
-            value=model.esLogstashDateformat
-        }}
+        <div style="margin-top: 34px;">
+          <label>Date Format: </label>
+          <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY-MM-DD"}} YYYY-MM-DD</label>
+          <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY-MM"}} YYY-MMM</label>
+          <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY"}} YYYY</label>
+        </div>
       </div>
     </div>
     <div>

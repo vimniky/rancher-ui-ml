@@ -7,6 +7,11 @@
         disabled=target.disabled
         href=false
       }}
+        {{#if (eq target.type 'embedded')}}
+          <div class="badge-thirdparty">
+            <strong>Experimental</strong>
+          </div>
+        {{/if}}
         <p>{{target.label}}</p>
       {{/link-to}}
     {{/if}}

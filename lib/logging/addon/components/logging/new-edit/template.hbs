@@ -48,11 +48,11 @@
     }}
   {{/if}}
 {{else if (eq targetType 'splunk')}}
-  {{logging/target-splunk model=model}}
+  {{logging/target-splunk model=model fields=fields}}
 {{else if (eq targetType 'kafka')}}
-  {{logging/target-kafka model=model}}
+  {{logging/target-kafka model=model fields=fields}}
 {{else if (eq targetType 'syslog')}}
-  {{logging/target-syslog model=model}}
+  {{logging/target-syslog model=model fields=fields}}
 {{/if}}
 
 
