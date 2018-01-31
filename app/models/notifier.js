@@ -35,7 +35,7 @@ export default Resource.extend({
     const ec = this.get('smtpConfig');
     const wc = this.get('webhookConfig');
     if (sc) {
-      return get(sc, 'channel');
+      return get(sc, 'defaultRecipient');
     }
     if (pc) {
       // return get(pc, 'serviceKey');
@@ -58,16 +58,16 @@ export default Resource.extend({
     const wc = this.get('webhookConfig');
 
     if (sc) {
-      return 'Slack Channel';
+      return 'Channel';
     }
     if (pc) {
-      return 'Pagerduty Service Key';
+      return 'Service Key';
     }
     if (ec) {
-      return 'Email Address';
+      return 'Address';
     }
     if (wc) {
-      return 'Webhook URL';
+      return 'URL';
     }
     return 'Notifier';
   }.property('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig'),

@@ -6,23 +6,22 @@
       disabled={{t.disabled}}
       alt={{t.type}}
     >
-      {{t.label}}
+      <!-- <p>{{t.label}}</p> -->
     </a>
   {{/each}}
 </div>
 
+<h2 class="text-capitalize">{{currentType}} Notifier Configuration</h2>
 <hr />
 
 <div class="row">
   <div class="col span-12 mt-0 mb-0">
     {{form-name-description
-      name=model.name
-      nameDisabled=false
-      description=model.description
-      bothColClass="col span-6 mt-0"
-      colClass="col span-12 mt-0"
-      namePlaceholder="newContainer.name.placeholder"
-      descriptionPlaceholder="newContainer.description.placeholder"
+        name=model.name
+        nameDisabled=false
+        description=model.description
+        bothColClass="col span-6 mt-0"
+        colClass="col span-12 mt-0"
     }}
   </div>
 </div>
@@ -41,8 +40,8 @@
       <div class="acc-label text-capitalize">Channel</div>
       {{input
           classNames="form-control"
-          value=model.slackConfig.channel
-          placeholder="e.g. test"
+          value=model.slackConfig.defaultRecipient
+          placeholder="e.g. #test"
       }}
     </div>
   </div>
@@ -55,7 +54,7 @@
         {{input
             classNames="form-control"
             value=model.emailConfig.smtpHost
-            placeholder=""
+            placeholder="e.g. 192.168.1.121"
         }}
       </div>
       <div class="col span-6">
@@ -63,7 +62,7 @@
         {{input
             classNames="form-control"
             value=model.emailConfig.smtpPort
-            placeholder=""
+            placeholder="e.g. 465"
         }}
       </div>
     </div>
@@ -73,7 +72,7 @@
         {{input
             classNames="form-control"
             value=model.emailConfig.smtpUsername
-            placeholder=""
+            placeholder="e.g. John"
         }}
       </div>
       <div class="col span-6">
@@ -82,18 +81,18 @@
             type="password"
             classNames="form-control"
             value=model.emailConfig.smtpPassword
-            placeholder=""
+            placeholder="Your password"
         }}
       </div>
     </div>
   </section>
   <div class="row">
     <div class="col span-6">
-      <div class="acc-label text-capitalize">Receiver Email Address</div>
+      <div class="acc-label text-capitalize">Default Receiver Email</div>
       {{input
           classNames="form-control"
-          value=model.emailConfig.receiver
-          placeholder=""
+          value=model.emailConfig.defaultRecipient
+          placeholder="e.g. admin@abc.com"
       }}
     </div>
   </div>
@@ -104,7 +103,6 @@
             type="checkbox"
             classNames="form-control"
             checked=model.emailConfig.requireTLS
-            placeholder=""
         }} Use TLS
       </label>
     </div>
@@ -116,7 +114,7 @@
       {{input
           classNames="form-control"
           value=model.pagerdutyConfig.serviceKey
-          placeholder=""
+          placeholder="Your pagerduty serviceKey"
       }}
     </div>
   </div>
@@ -127,14 +125,22 @@
       {{input
           classNames="form-control"
           value=model.webhook.url
-          placeholder=""
+          placeholder="Your webhook URL"
       }}
     </div>
   </div>
 {{/if}}
 
 <div class="footer-actions">
-  {{save-cancel createLabel='generic.save' save="save" cancel="cancel"}}
+  {{#if (eq currentType 'slack')}}
+    <div style="display: flex; justify-content:center;">
+      {{save-cancel savedLabel="notifierPage.testedBtnLabel" createLabel='generic.test' cancelDisabled=true save="test"}}
+      <div style="width:10px;"></div>
+      {{save-cancel createLabel='generic.save' save="save" cancel="cancel"}}
+    </div>
+  {{else}}
+    {{save-cancel createLabel='generic.save' save="save" cancel="cancel"}}
+  {{/if}}
 </div>
 
 {{#if (eq currentType 'slack')}}

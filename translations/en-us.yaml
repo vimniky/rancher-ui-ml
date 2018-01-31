@@ -1465,6 +1465,7 @@ alertPage:
     editHeader: Edit alert
 
 notifierPage:
+  testedBtnLabel: OK
   index:
     table:
       createdAt: Created

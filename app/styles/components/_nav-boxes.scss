@@ -1,4 +1,4 @@
-.logging-targets {
+.nav-boxes.logging-targets {
   .nav-box-item {
     position: relative;
   }
@@ -50,13 +50,18 @@
     }
   }
 
+  .driver p {
+    position: absolute;
+    bottom: -8px!important;
+    font-size: 0.9em;
+  }
   .none {
     background-image: url('images/providers/none.svg');
     background-size: 180px 110px;
   }
   .elasticsearch {
     background-image: url('images/providers/elasticsearch.svg');
-    background-size: 60px 60px;
+    background-size: 70px 70px;
     background-position: center 30%!important;
   }
   .splunk {
@@ -85,7 +90,8 @@
   }
   .email {
     background-image: url('images/providers/email.svg');
-    background-size: 80px 80px;
+    background-size: 90px 90px;
+    background-position-y: 30%!important;
   }
   .pagerduty {
     background-image: url('images/providers/pagerduty.svg');
@@ -93,7 +99,7 @@
   }
   .webhook {
     background-image: url('images/providers/webhook.svg');
-    background-size: 65px 65px;
+    background-size: 60px 60px;
   }
 }
 

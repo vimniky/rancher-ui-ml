@@ -10,13 +10,14 @@
 
 <td data-title="{{dt.type}}" class="clip text-capitalize">
   {{model.notifierType}}
+  {{#if showNotifierValue}}
+    <div class="text-muted text-small">{{model.notifierLabel}}: {{model.notifierValue}}</div>
+  {{/if}}
 </td>
 
 <td data-title="{{dt.name}}" >
   {{model.displayName}}
-  {{#if showNotifierValue}}
-    <div class="text-muted text-small">{{model.notifierValue}}</div>
-  {{/if}}
+   <div class="text-muted text-small">{{model.description}}</div>
 </td>
 
 <td data-title="{{dt.created}}" class="clip">
