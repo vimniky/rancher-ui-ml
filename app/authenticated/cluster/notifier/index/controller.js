@@ -14,41 +14,19 @@ export default Controller.extend({
   init(...args) {
     this._super(...args);
     const globalStore = get(this, 'globalStore')
-    const notifiers = [
-      {
-        actions: {},
-        availableActions: [],
-        name: 'notifier-1',
-        type: 'notifier',
-        description: null,
-        slackConfig: {
-          "webhookURL":"slack.com/xxx",
-          "channel": "#test",
-        },
-        emailConfig: {
-          "smtpHost":"192.168.1.121",
-          "smtpPort":"465",
-          "smtpUsername":"admin",
-          "smtpPassword":"admin",
-          "receiver":"admin@test.com",
-          "requireTLS":true
-        },
-        pagerdutyConfig: {
-          "serviceKey":"xxxxx",
-        },
-        webhookConfig: {
-          "url":"xxxxx",
-        },
-      },
-    ];
     // set(this, 'notifiers', notifiers)
   },
 
+  fetch() {
+    get(this, 'globalStore').findAll('notifier', {forceReload: true}).then(data => {
+      set(this, 'notifiers', data);
+    });
+  },
   actions: {
     showNewEditModal() {
       this.get('modalService').toggleModal('notifier/modal-new-edit', {
         closeWithOutsideClick: false,
-        // model: this.get('model'),
+        callback: get(this, 'fetch').bind(this),
       });
     },
   },

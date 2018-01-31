@@ -7,6 +7,17 @@ import Resource from 'ember-api-store/models/resource';
 export default Resource.extend({
   type: 'notifier',
 
+  cb() {
+    this.delete().then(res => {
+      get(this, 'store')._remove('notifier', this);
+    });
+  },
+
+  actions: {
+    promptDelete: function() {
+      this.get('modalService').toggleModal('confirm-delete', {resources: [this]});
+    },
+  },
   notifierType: function() {
     const sc = this.get('slackConfig');
     const pc = this.get('pagerdutyConfig');

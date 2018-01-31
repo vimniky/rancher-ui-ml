@@ -7,7 +7,6 @@ export default Route.extend({
   globalStore: service(),
 
   model() {
-
     const cs = get(this, 'globalStore');
     return hash({
       notifiers: cs.findAll('notifier'),

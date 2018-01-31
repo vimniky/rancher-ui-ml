@@ -1466,6 +1466,7 @@ alertPage:
 
 notifierPage:
   testedBtnLabel: OK
+  testingBtnLabel: Testing
   index:
     table:
       createdAt: Created

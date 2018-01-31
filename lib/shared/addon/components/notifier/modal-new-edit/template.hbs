@@ -2,42 +2,41 @@
   {{#each types as |t|}}
     <a
       {{action "switchType" t.type}}
-      class="col span-2 nav-box-item driver {{t.type}} {{if (eq t.type currentType) 'active' ''}}"
+      class="col span-2 nav-box-item driver {{if (eq t.type 'smtp') 'email' t.type}} {{if (eq t.type currentType) 'active' ''}}"
       disabled={{t.disabled}}
       alt={{t.type}}
     >
-      <!-- <p>{{t.label}}</p> -->
+      <p>{{t.label}}</p>
     </a>
   {{/each}}
 </div>
-
-<h2 class="text-capitalize">{{currentType}} Notifier Configuration</h2>
 <hr />
-
-<div class="row">
-  <div class="col span-12 mt-0 mb-0">
-    {{form-name-description
-        name=model.name
-        nameDisabled=false
-        description=model.description
-        bothColClass="col span-6 mt-0"
-        colClass="col span-12 mt-0"
-    }}
-  </div>
-</div>
 
 {{#if (eq currentType 'slack')}}
   <div class="row">
-    <div class="col span-6">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+          name=model.displayName
+          nameDisabled=false
+          description=model.description
+          bothColClass="col span-6 mt-0"
+          colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-12">
       <div class="acc-label text-capitalize">Slack webhook URL{{field-required}}</div>
       {{input
           classNames="form-control"
-          value=model.slackConfig.webhookURL
+          value=model.slackConfig.url
           placeholder="e.g. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
       }}
     </div>
+  </div>
+  <div class="row">
     <div class="col span-6">
-      <div class="acc-label text-capitalize">Channel</div>
+      <div class="acc-label text-capitalize">Default Channel</div>
       {{input
           classNames="form-control"
           value=model.slackConfig.defaultRecipient
@@ -45,7 +44,19 @@
       }}
     </div>
   </div>
-{{else if (eq currentType 'email')}}
+{{else if (eq currentType 'smtp')}}
+  <div class="row">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+          name=model.displayName
+          nameDisabled=false
+          description=model.description
+          bothColClass="col span-6 mt-0"
+          colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
+
   <div class="acc-label text-capitalize">Smtp Server</div>
   <section class="box">
     <div class="row">
@@ -53,7 +64,7 @@
         <div class="acc-label text-capitalize">Smtp Host</div>
         {{input
             classNames="form-control"
-            value=model.emailConfig.smtpHost
+            value=model.smtpConfig.host
             placeholder="e.g. 192.168.1.121"
         }}
       </div>
@@ -61,7 +72,7 @@
         <div class="acc-label text-capitalize">Smtp Port</div>
         {{input
             classNames="form-control"
-            value=model.emailConfig.smtpPort
+            value=model.smtpConfig.port
             placeholder="e.g. 465"
         }}
       </div>
@@ -71,7 +82,7 @@
         <div class="acc-label text-capitalize">Smtp Username</div>
         {{input
             classNames="form-control"
-            value=model.emailConfig.smtpUsername
+            value=model.smtpConfig.username
             placeholder="e.g. John"
         }}
       </div>
@@ -80,7 +91,7 @@
         {{input
             type="password"
             classNames="form-control"
-            value=model.emailConfig.smtpPassword
+            value=model.smtpConfig.password
             placeholder="Your password"
         }}
       </div>
@@ -91,7 +102,7 @@
       <div class="acc-label text-capitalize">Default Receiver Email</div>
       {{input
           classNames="form-control"
-          value=model.emailConfig.defaultRecipient
+          value=model.smtpConfig.defaultRecipient
           placeholder="e.g. admin@abc.com"
       }}
     </div>
@@ -102,12 +113,23 @@
         {{input
             type="checkbox"
             classNames="form-control"
-            checked=model.emailConfig.requireTLS
+            checked=model.smtpConfig.tls
         }} Use TLS
       </label>
     </div>
   </div>
 {{else if (eq currentType 'pagerduty')}}
+  <div class="row">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+          name=model.displayName
+          nameDisabled=false
+          description=model.description
+          bothColClass="col span-6 mt-0"
+          colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
   <div class="row">
     <div class="col span-12">
       <div class="acc-label text-capitalize">Service Key</div>
@@ -120,11 +142,22 @@
   </div>
 {{else if (eq currentType 'webhook')}}
   <div class="row">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+          name=model.displayName
+          nameDisabled=false
+          description=model.description
+          bothColClass="col span-6 mt-0"
+          colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
+  <div class="row">
     <div class="col span-12">
       <div class="acc-label text-capitalize">Webhook URL</div>
       {{input
           classNames="form-control"
-          value=model.webhook.url
+          value=model.webhookConfig.url
           placeholder="Your webhook URL"
       }}
     </div>
@@ -132,15 +165,11 @@
 {{/if}}
 
 <div class="footer-actions">
-  {{#if (eq currentType 'slack')}}
-    <div style="display: flex; justify-content:center;">
-      {{save-cancel savedLabel="notifierPage.testedBtnLabel" createLabel='generic.test' cancelDisabled=true save="test"}}
-      <div style="width:10px;"></div>
-      {{save-cancel createLabel='generic.save' save="save" cancel="cancel"}}
-    </div>
-  {{else}}
+  <div style="display: flex; justify-content:center;">
+    {{save-cancel savingLabel="notifierPage.testingBtnLabel" savedLabel="notifierPage.testedBtnLabel" createLabel='generic.test' cancelDisabled=true save="test"}}
+    <div style="width:10px;"></div>
     {{save-cancel createLabel='generic.save' save="save" cancel="cancel"}}
-  {{/if}}
+  </div>
 </div>
 
 {{#if (eq currentType 'slack')}}
