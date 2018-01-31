@@ -29,57 +29,35 @@
   }}
 </div>
 
-<div class="box mt-20">
-  <div class="row">
-    <div class="col span-6">
-      <label class="acc-label">Initial Wait</label>
-      {{alert/form-interval value=3}}
-      <p class="text-info text-small">
-        How long to initially wait to send a notification when an alert is triggered
-      </p>
-    </div>
 
-    <div class="col span-6">
-      <label class="acc-label">Interval</label>
-      {{alert/form-interval value=3}}
-      <p class="text-info text-small">Repeat interval of sending a notification when an alert is active.</p>
+<div class="mt-20 clearfix">
+
+  {{#unless showAdvanced}}
+  <div class="text-right text-small">
+    <a role="button" class="btn bg-transparent p-0" {{action "showAdvanced"}}>Show Advanced Options</a>
+  </div>
+  {{/unless}}
+
+  {{#if showAdvanced}}
+  <div class="box">
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">Initial Wait</label>
+        {{alert/form-interval value=3}}
+        <p class="text-info text-small">
+          How long to initially wait to send a notification when an alert is triggered
+        </p>
+      </div>
+
+      <div class="col span-6">
+        <label class="acc-label">Interval</label>
+        {{alert/form-interval value=3}}
+        <p class="text-info text-small">Repeat interval of sending a notification when an alert is active.</p>
+      </div>
     </div>
   </div>
-
-  <div>
-    <div><label class="acc-label">Severity</label></div>
-    <label class="mr-10 text-info">{{radio-button selection=newAlert.severity value="info"}} Info</label>
-    <label class="mr-10 text-warning">{{radio-button selection=newAlert.severity value="warning"}} Warning</label>
-    <label class="mr-10 text-error">{{radio-button selection=newAlert.severity value="critical"}} Critical</label>
-  </div>
+  {{/if}}
 </div>
-
-<section class="box mt-20 alert-rule-overview">
-  <h2>Overview</h2>
-  <hr/>
-  <div class="content">
-    <div>
-      Send an alert to
-    </div>
-    <ul class="text-muted">
-      {{#each newAlert.recipients as |r|}}
-        <li>
-          {{if r.notifierType r.notifierType 'Missing'}} {{if r.recipient r.recipient 'Missing'}}
-        </li>
-      {{/each}}
-    </ul>
-    <div>
-      When
-      <span class="text-capitalize">
-        {{if newAlert.targetType newAlert.targetType 'Missing'}}
-      </span>
-      <span class="text-muted">
-        {{if newAlert.targetName newAlert.targetName 'Missing'}}
-      </span>
-      is not running.
-    </div>
-  </div>
-</section>
 
 <div class="mt-20">
   {{top-errors errors=errors}}
