@@ -34,7 +34,7 @@
           }}
         </div>
         <div class="col span-1" style="padding-top: 29px">
-          <button class="btn bg-primary icon-btn" {{action "remove" item}}>
+          <button class="btn bg-primary icon-btn {{if canRemove '' 'disabled'}}" {{action "remove" item}}>
             <span class="darken"><i class="icon icon-minus"></i></span>
           </button>
         </div>
