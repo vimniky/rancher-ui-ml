@@ -1,7 +1,7 @@
 <h4 class="pt-30">
   Splunk HTTP Event Collector Configuration
   <span class="text-info text-small">
-  You can find instructions on how to configre Splunk HEC (HTTP Event Collector)
+  You can find instructions on how to configre Splunk HEC(HTTP Event Collector)
   <a href="http://docs.splunk.com/Documentation/Splunk/7.0.0/Data/UsetheHTTPEventCollector" target="_blank">here</a>.
   </span>
 </h4>
@@ -11,7 +11,7 @@
     <label class="acc-label" for="">Endpoint{{field-required}}</label>
     {{input
         type="text"
-        value=model.endpoint
+        value=config.endpoint
         classNames="form-control"
         placeholder="e.g. https://192.168.1.10:8088"
     }}
@@ -22,7 +22,7 @@
       <label class="acc-label" for="">Token{{field-required}}</label>
       {{input
           type="text"
-          value=model.splunkToken
+          value=config.token
           classNames="form-control"
           placeholder="Your token"
       }}
@@ -35,7 +35,7 @@
       <label class="acc-label" for="">Source</label>
       {{input
           type="text"
-          value=model.splunkSource
+          value=config.source
           classNames="form-control"
           placeholder="e.g. fluentd"
       }}
