@@ -1,7 +1,7 @@
 <section class="row">
   <div class="col span-1">
     <div class="pt-10">
-      <label>WHEN</label>
+      <label>WHEN A</label>
     </div>
   </div>
 
@@ -74,11 +74,11 @@
       {{radio-button selection=newAlert.targetPod.condition value="notscheduled"}} Not Scheduled
     </label>
     <label class="mr-10">
-      {{radio-button selection=newAlert.targetPod.condition value="restarts"}} Restart
+      {{radio-button selection=newAlert.targetPod.condition value="restarts"}} Restarted
     </label>
     <div style="display:inline-block;width:100px;">
       {{input-integer disabled=(not-eq newAlert.targetPod.condition 'restarts') min=1 max=1000 value=newAlert.targetPod.restartTimes}}
-    </div> times in 5 minutes
+    </div> times within the last 5 minutes
   {{else if (or (eq newAlert.targetType 'workload') (eq newAlert.targetType 'workloadSelectors'))}}
     <div class="row">
       <div class="col span-6 mt-0">
@@ -102,7 +102,7 @@
 
 <section class="row">
   <div class="col span-1">
-    SEND
+    SEND A
   </div>
   <div class="col span-10">
     <label class="mr-10">{{radio-button selection=newAlert.severity value="critical"}} Critical</label>
