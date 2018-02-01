@@ -1,3 +1,4 @@
+{{log '-----newAlert' newAlert}}
 <section class="row">
   <div class="col span-1">
     <div class="pt-10">
@@ -16,7 +17,7 @@
         {{searchable-select
             content=pods
             class="form-control"
-            value=podId
+            value=newAlert.targetPod.id
             optionValuePath="id"
             optionLabelPath="name"
             placeholder="Choose a Pod"
