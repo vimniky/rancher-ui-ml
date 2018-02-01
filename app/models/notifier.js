@@ -4,7 +4,7 @@ import { get, set } from '@ember/object';
 import ResourceUsage from 'shared/mixins/resource-usage';
 import Resource from 'ember-api-store/models/resource';
 
-export default Resource.extend({
+const Notifier = Resource.extend({
   type: 'notifier',
 
   cb() {
@@ -134,3 +134,10 @@ export default Resource.extend({
     ];
   }.property('actionLinks.{activate,deactivate}','links.{update,remove}'),
 });
+
+Notifier.reopenClass({
+  pollTransitioningDelay: 300,
+  pollTransitioningInterval: 3000,
+});
+
+export default Notifier;

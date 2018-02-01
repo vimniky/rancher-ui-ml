@@ -20,7 +20,7 @@
             optionValuePath="id"
             optionLabelPath="name"
             placeholder="Choose a Pod"
-            filter=targetFilter
+            readOnly=(not-eq newAlert.targetType 'pod')
         }}
       </div>
     </div>
@@ -39,7 +39,7 @@
             optionValuePath="id"
             optionLabelPath="name"
             placeholder="Choose a Workload"
-            filter=targetFilter
+            readOnly=(not-eq newAlert.targetType 'workload')
         }}
       </div>
     </div>
@@ -51,11 +51,18 @@
       </div>
       <div class="col span-6 mt-0">
         <!-- <p class="text-info text-small">Workloads that match all the selectors will be selected.</p> -->
-        {{form-key-value
-            addActionLabel="alertPage.addSelectorLabel"
-            initialMap=newAlert.targetWorkload.selector
-            initialArray=initialArray
-        }}
+        {{#if (eq newAlert.targetType 'workloadSelectors')}}
+          {{form-key-value
+              addActionLabel="alertPage.addSelectorLabel"
+              initialMap=newAlert.targetWorkload.selector
+              initialArray=initialArray
+          }}
+        {{else}}
+          <button {{action "noop"}} style="cursor:not-allowed;" class="btn bg-disabled icon-btn">
+            <span class="darken"><i class="icon icon-plus text-small"/></span>
+            <span>{{t 'alertPage.addSelectorLabel'}}</span>
+          </button>
+        {{/if}}
       </div>
     </div>
   </div>
