@@ -1448,6 +1448,9 @@ alertPage:
   addSelectorLabel: Add Selector
   create: Create
   save: Save
+  action:
+    mute: Mute
+    unmute: Unmute
   index:
     stateTabs:
       all: All
@@ -1458,8 +1461,9 @@ alertPage:
     table:
       noMatch: No alerts match the current search.
       noData: No alerts
-      rules: Rules
-      notifiers: Notifiers
+      condition: Condition
+      target: Target
+      recipients: Recipients
   new:
     addHeader: Add Alert
     editHeader: Edit alert

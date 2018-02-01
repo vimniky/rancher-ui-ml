@@ -46,12 +46,12 @@
     <div class="row">
       <div class="col span-3">
         <label>
-          {{radio-button selection=newAlert.targetType value="workloadSelectors"}} Workload Selector
+          {{radio-button selection=newAlert.targetType value="workloadSelector"}} Workload Selector
         </label>
       </div>
       <div class="col span-6 mt-0">
         <!-- <p class="text-info text-small">Workloads that match all the selectors will be selected.</p> -->
-        {{#if (eq newAlert.targetType 'workloadSelectors')}}
+        {{#if (eq newAlert.targetType 'workloadSelector')}}
           {{form-key-value
               addActionLabel="alertPage.addSelectorLabel"
               initialMap=newAlert.targetWorkload.selector
@@ -86,7 +86,7 @@
     <div style="display:inline-block;width:100px;">
       {{input-integer disabled=(not-eq newAlert.targetPod.condition 'restarts') min=1 max=1000 value=newAlert.targetPod.restartTimes}}
     </div> times within the last 5 minutes
-  {{else if (or (eq newAlert.targetType 'workload') (eq newAlert.targetType 'workloadSelectors'))}}
+  {{else if (or (eq newAlert.targetType 'workload') (eq newAlert.targetType 'workloadSelector'))}}
     <div class="row">
       <div class="col span-6 mt-0">
         <div class="input-group pt-5">

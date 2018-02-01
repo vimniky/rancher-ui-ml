@@ -1,11 +1,26 @@
 import Resource from 'ember-api-store/models/resource';
+import { get, set } from '@ember/object';
 
 export default Resource.extend({
-  type: 'projectAlert',
+  type: 'projectalert',
 
   init(...args) {
     this._super(...args);
   },
+
+  targetType: function() {
+    const tp = get(this, 'targetPod');
+    const tw = get(this, 'targetWorkload');
+    if (tp && tp.id) {
+      return 'pod';
+    }
+    if (tw && tw.id) {
+      return 'workload'
+    }
+    if (tw && tw.selector) {
+      return 'workloadSelector';
+    }
+  }.property('model.targetPod', 'model.targetWorkload'),
 
   availableActions: function() {
     let a = this.get('actionLinks');
@@ -19,14 +34,16 @@ export default Resource.extend({
       },
       {divider: true },
       {
-        label: 'action.mute',
+        label: 'alertPage.action.mute',
         action: 'mute',
         enabled: !!a.mute,
+        icon: 'icon icon-mute',
         bulkable: true,
       },
       {
-        label: 'action.unmute',
+        label: 'alertPage.action.unmute',
         action: 'unmute',
+        icon: 'icon icon-unmute',
         enabled: !!a.unmute,
         bulkable: true,
       },

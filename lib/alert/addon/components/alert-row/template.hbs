@@ -3,20 +3,28 @@
     {{check-box nodeId=model.id}}
   </td>
 {{/if}}
-<td data-title="{{dt.state}}" >
+<td data-title="{{dt.state}}" class="clip">
   {{badge-state model=model}}
 </td>
 <td data-title="{{dt.displayName}}" class="clip">
   {{model.displayName}}
+  <div class="text-small text-muted">{{model.description}}</div>
 </td>
-<td data-title="{{dt.description}}" class="clip">
-  {{model.description}}
+<td data-title="{{dt.target}}" class="clip">
+  {{targetType}}
+  {{#if (eq model.targetType 'workloadSelector')}}
+    <div class="text-muted">
+      {{#each targetAry as |item|}}
+        <span class="badge badge-xs bg-info" style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;">{{item}}</span>
+      {{/each}}
+    </div>
+  {{/if}}
 </td>
-<td data-title="{{dt.rules}}" class="clip">
-  <div class="text-small text-muted">TODO</div>
+<td data-title="{{dt.condition}}" class="clip">
+  {{condition}}
 </td>
-<td data-title="{{dt.notifiers}}" >
-  {{model.recipient.recipientType}}
+<td data-title="{{dt.recipients}}" >
+  {{recipients}}
 </td>
 
 <td data-title="{{t 'generic.actions'}}" class="actions">
