@@ -1,14 +1,15 @@
 <section class="row">
-  <div class="col span-2">
-    <span>
-      Send Alert to Notifier
-    </span>
+  <div class="col span-1">
+    <div class="pt-10">
+      ALERT
+    </div>
   </div>
   <div class="col span-10">
-    {{#each newAlert.recipients as |recipient|}}
+    {{#each newAlert.recipients as |recipient idx|}}
       {{alert/form-recipient-item
           disableRemove=disableRemove
           remove="remove"
+          isFirst=(eq idx 0)
           notifiers=notifiers
           model=recipient
       }}

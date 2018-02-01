@@ -1461,7 +1461,7 @@ alertPage:
       rules: Rules
       notifiers: Notifiers
   new:
-    addHeader: Add alert
+    addHeader: Add Alert
     editHeader: Edit alert
 
 notifierPage:

@@ -1,54 +1,69 @@
 <section class="row">
-  <div class="col span-2">
-    <label>Choose Target Type:</label>
+  <div class="col span-1">
+    <div class="pt-10">
+      <label>WHEN</label>
+    </div>
   </div>
-  <div class="col span-10">
-    <label class="mr-10">
-      {{radio-button selection=newAlert.targetType value="pod"}} Pod
-    </label>
-    <label class="mr-10">
-      {{radio-button selection=newAlert.targetType value="workload"}} Workload
-    </label>
-    <label class="mr-10">
-      {{radio-button selection=newAlert.targetType value="workloadSelectors"}} Workload Selectors
-    </label>
-  </div>
-</section>
-<hr/>
 
-<section class="row">
-  <div class="col span-2">
-    <label>Choose Target</label>
-  </div>
   <div class="col span-10">
-    {{#if (eq newAlert.targetType 'workloadSelectors')}}
-      <p class="text-info text-small mt-0">Workloads that match all the selectors will be selected.</p>
-      {{form-key-value
-          addActionLabel="alertPage.addSelectorLabel"
-          initialMap=newAlert.targetWorkload.selector
-          initialArray=initialArray
-      }}
-    {{else}}
-      <div class="row">
-        <div class="col span-6 mt-0">
-          {{searchable-select
-              content=targets
-              class="form-control"
-              value=targetId
-              optionValuePath="id"
-              optionLabelPath="name"
-              placeholder="Choose a target"
-              filter=targetFilter
-          }}
-        </div>
+    <div class="row">
+      <div class="col span-3">
+        <label>
+          {{radio-button selection=newAlert.targetType value="pod"}} Pod
+        </label>
       </div>
-    {{/if}}
+      <div class="col span-6 mt-0">
+        {{searchable-select
+            content=pods
+            class="form-control"
+            value=podId
+            optionValuePath="id"
+            optionLabelPath="name"
+            placeholder="Choose a Pod"
+            filter=targetFilter
+        }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col span-3">
+        <label>
+          {{radio-button selection=newAlert.targetType value="workload"}} Workload
+        </label>
+      </div>
+      <div class="col span-6 mt-0">
+        {{searchable-select
+            content=workloads
+            class="form-control"
+            value=workloadId
+            optionValuePath="id"
+            optionLabelPath="name"
+            placeholder="Choose a Workload"
+            filter=targetFilter
+        }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col span-3">
+        <label>
+          {{radio-button selection=newAlert.targetType value="workloadSelectors"}} Workload Selector
+        </label>
+      </div>
+      <div class="col span-6 mt-0">
+        <!-- <p class="text-info text-small">Workloads that match all the selectors will be selected.</p> -->
+        {{form-key-value
+            addActionLabel="alertPage.addSelectorLabel"
+            initialMap=newAlert.targetWorkload.selector
+            initialArray=initialArray
+        }}
+      </div>
+    </div>
   </div>
 </section>
 <hr/>
 <section class="row">
-  <div class="col span-2">
-    <label class="pt-10">Choose Condition</label>
+  <div class="col span-1">
+    <label class="pt-10">IS</label>
   </div>
   <div class="col span-10">
   {{#if (eq newAlert.targetType 'pod')}}
@@ -74,7 +89,7 @@
               valueMax=100
               step=1
           }}
-          <span class="input-group-addon">{{newAlert.targetWorkload.unavailablePercentage}}% are unavailable</span>
+          <span class="input-group-addon">{{newAlert.targetWorkload.unavailablePercentage}}% unavailable</span>
         </div>
       </div>
     </div>
@@ -84,9 +99,10 @@
 </section>
 
 <hr/>
+
 <section class="row">
-  <div class="col span-2">
-    Choose Severity
+  <div class="col span-1">
+    SEND
   </div>
   <div class="col span-10">
     <label class="mr-10">{{radio-button selection=newAlert.severity value="critical"}} Critical</label>

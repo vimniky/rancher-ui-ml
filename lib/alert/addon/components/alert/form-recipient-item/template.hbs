@@ -1,5 +1,8 @@
 <section class="row">
-  <div class="col mt-0 span-10-of-24">
+  <div class="col span-1-of-24">
+    {{if isFirst 'TO' 'AND'}}
+  </div>
+  <div class="col mt-0 span-9-of-24">
     {{searchable-select
         classNames="text-capitalize"
         content=notifiers
@@ -19,7 +22,7 @@
     {{/if}}
   </div>
 
-  <div class="col mt-0 span-10-of-24">
+  <div class="col mt-0 span-9-of-24">
     {{input
         classNames="form-control"
         placeholder=recipientPlaceholder
