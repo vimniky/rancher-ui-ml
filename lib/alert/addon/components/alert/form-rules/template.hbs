@@ -35,7 +35,7 @@
         {{searchable-select
             content=workloads
             class="form-control"
-            value=workloadId
+            value=newAlert.targetWorkload.id
             optionValuePath="id"
             optionLabelPath="name"
             placeholder="Choose a Workload"
@@ -55,7 +55,7 @@
           {{form-key-value
               addActionLabel="alertPage.addSelectorLabel"
               initialMap=newAlert.targetWorkload.selector
-              initialArray=initialArray
+              changed=(action (mut newAlert.targetWorkload.selector))
           }}
         {{else}}
           <button {{action "noop"}} style="cursor:not-allowed;" class="btn bg-disabled icon-btn">
