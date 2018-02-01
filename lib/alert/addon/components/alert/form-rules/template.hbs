@@ -80,11 +80,16 @@
     <label class="mr-10">
       {{radio-button selection=newAlert.targetPod.condition value="notscheduled"}} Not Scheduled
     </label>
-    <label class="mr-10">
+    <label class="">
       {{radio-button selection=newAlert.targetPod.condition value="restarts"}} Restarted
     </label>
-    <div style="display:inline-block;width:100px;">
-      {{input-integer disabled=(not-eq newAlert.targetPod.condition 'restarts') min=1 max=1000 value=newAlert.targetPod.restartTimes}}
+    <div style="display:inline-block;width:80px;">
+      {{input-integer
+          classNames="form-contorl input-sm"
+          disabled=(not-eq newAlert.targetPod.condition 'restarts')
+          min=1
+          value=newAlert.targetPod.restartTimes
+      }}
     </div> times within the last 5 minutes
   {{else if (or (eq newAlert.targetType 'workload') (eq newAlert.targetType 'workloadSelector'))}}
     <div class="row">

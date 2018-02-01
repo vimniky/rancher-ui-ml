@@ -15,11 +15,9 @@
       </div>
       <div class="col span-6 mt-0">
         {{searchable-select
-            content=pods
+            content=systemServices
             class="form-control"
-            value=newAlert.targetPod.id
-            optionValuePath="id"
-            optionLabelPath="name"
+            value=newAlert.targetSystemService.id
             placeholder="Choose a System Service"
             readOnly=(not-eq newAlert.targetType 'systemService')
         }}
@@ -71,43 +69,59 @@
 <hr/>
 <section class="row">
   <div class="col span-1">
-    <label class="pt-10">IS</label>
+    <label class="{{if (not-eq targetType 'systemService') 'pt-10' 0}}">IS</label>
   </div>
   <div class="col span-10">
-  {{#if (eq newAlert.targetType 'pod')}}
+  {{#if (eq newAlert.targetType 'systemService')}}
     <label class="mr-10">
-      {{radio-button selection=newAlert.targetPod.condition value="notrunning"}} Not Running
+      {{radio-button selection="whatever" value="whatever"}} Unhealthy
     </label>
+  {{else if (or (eq newAlert.targetType 'node') (eq newAlert.targetType 'nodeSelector'))}}
     <label class="mr-10">
-      {{radio-button selection=newAlert.targetPod.condition value="notscheduled"}} Not Scheduled
+      {{radio-button selection=newAlert.targetNode.condition value="notready"}} Not Ready
     </label>
-    <label class="mr-10">
-      {{radio-button selection=newAlert.targetPod.condition value="restarts"}} Restarted
+    <label class="ml-10">
+      {{radio-button selection=newAlert.targetNode.condition value="cpu"}} CPU usage over
     </label>
-    <div style="display:inline-block;width:100px;">
-      {{input-integer disabled=(not-eq newAlert.targetPod.condition 'restarts') min=1 max=1000 value=newAlert.targetPod.restartTimes}}
-    </div> times within the last 5 minutes
-  {{else if (or (eq newAlert.targetType 'workload') (eq newAlert.targetType 'nodeSelector'))}}
-    <div class="row">
-      <div class="col span-6 mt-0">
-        <div class="input-group pt-5">
-          {{input-slider
-              value=newAlert.targetNode.unavailablePercentage
-              valueMin=0
-              valueMax=100
-              step=1
-          }}
-          <span class="input-group-addon">{{newAlert.targetNode.unavailablePercentage}}% unavailable</span>
-        </div>
-      </div>
-    </div>
+    <div style="display:inline-block;width:60px;">
+      {{input-integer
+          classNames="form-contorl input-sm"
+          disabled=(not-eq newAlert.targetNode.condition 'cpu')
+          min=1
+          value=percent
+      }}
+    </div>%
+
+    <label class="ml-10">
+      {{radio-button selection=newAlert.targetNode.condition value="mem"}} MEM usage over
+    </label>
+    <div style="display:inline-block;width:60px;">
+      {{input-integer
+          classNames="form-contorl input-sm"
+          disabled=(not-eq newAlert.targetNode.condition 'mem')
+          min=1 max=100
+          value=percent
+      }}
+    </div>%
+
+    <label class="ml-10">
+      {{radio-button selection=newAlert.targetNode.condition value="disk"}} DISK usage over
+    </label>
+    <div style="display:inline-block;width:60px;">
+      {{input-integer
+          classNames="form-contorl input-sm"
+          disabled=(not-eq newAlert.targetNode.condition 'disk')
+          min=1
+          max=100
+          value=percent
+      }}
+    </div>%
   {{else}}
   {{/if}}
   </div>
 </section>
 
 <hr/>
-
 <section class="row">
   <div class="col span-1">
     SEND A
