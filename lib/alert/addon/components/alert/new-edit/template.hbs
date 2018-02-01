@@ -11,13 +11,22 @@
 </div>
 
 <div class="box mt-20">
-  {{alert/form-rules
-      pods=pods
-      pageScope=pageScope
-      workloads=workloads
-      isCreate=isCreate
-      newAlert=newAlert
-  }}
+  {{#if (eq pageScope 'project')}}
+    {{alert/form-rules
+        pods=pods
+        pageScope=pageScope
+        workloads=workloads
+        isCreate=isCreate
+        newAlert=newAlert
+    }}
+  {{else if (eq pageScope 'cluster')}}
+    {{alert/form-cluster-rules
+        nodes=nodes
+        pageScope=pageScope
+        isCreate=isCreate
+        newAlert=newAlert
+    }}
+  {{/if}}
   <hr/>
   {{alert/form-recipients
       pageScope=pageScope

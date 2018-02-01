@@ -2,25 +2,25 @@ import Resource from 'ember-api-store/models/resource';
 import { get, set } from '@ember/object';
 
 export default Resource.extend({
-  type: 'projectalert',
+  type: 'clusteralert',
 
   init(...args) {
     this._super(...args);
   },
 
   targetType: function() {
-    const tp = get(this, 'targetPod');
-    const tw = get(this, 'targetWorkload');
-    if (tp && tp.id) {
-      return 'pod';
+    const targetSystemService = get(this, 'targetSystemService');
+    const targetNode = get(this, 'targetNode');
+    if (targetSystemService && targetSystemService.id) {
+      return 'systemService';
     }
-    if (tw && tw.id) {
-      return 'workload'
+    if (targetNode && targetNode.id) {
+      return 'node'
     }
-    if (tw && tw.selector) {
-      return 'workloadSelector';
+    if (targetNode && targetNode.selector) {
+      return 'nodeSelector';
     }
-  }.property('model.targetPod', 'model.targetWorkload'),
+  }.property('model.targetSystemService', 'model.targetNode'),
 
   availableActions: function() {
     let a = this.get('actionLinks');

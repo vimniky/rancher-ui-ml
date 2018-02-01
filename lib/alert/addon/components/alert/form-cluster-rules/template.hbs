@@ -1,3 +1,4 @@
+{{log newAlert}}
 <section class="row">
   <div class="col span-1">
     <div class="pt-10">
@@ -9,7 +10,7 @@
     <div class="row">
       <div class="col span-3">
         <label>
-          {{radio-button selection=newAlert.targetType value="pod"}} Pod
+          {{radio-button selection=newAlert.targetType value="systemService"}} System Service
         </label>
       </div>
       <div class="col span-6 mt-0">
@@ -19,8 +20,8 @@
             value=newAlert.targetPod.id
             optionValuePath="id"
             optionLabelPath="name"
-            placeholder="Choose a Pod"
-            readOnly=(not-eq newAlert.targetType 'pod')
+            placeholder="Choose a System Service"
+            readOnly=(not-eq newAlert.targetType 'systemService')
         }}
       </div>
     </div>
@@ -28,34 +29,34 @@
     <div class="row">
       <div class="col span-3">
         <label>
-          {{radio-button selection=newAlert.targetType value="workload"}} Workload
+          {{radio-button selection=newAlert.targetType value="node"}} Node
         </label>
       </div>
       <div class="col span-6 mt-0">
         {{searchable-select
-            content=workloads
+            content=nodes
             class="form-control"
-            value=newAlert.targetWorkload.id
+            value=newAlert.targetNode.id
             optionValuePath="id"
             optionLabelPath="name"
-            placeholder="Choose a Workload"
-            readOnly=(not-eq newAlert.targetType 'workload')
+            placeholder="Choose a Node"
+            readOnly=(not-eq newAlert.targetType 'node')
         }}
       </div>
     </div>
     <div class="row">
       <div class="col span-3">
         <label>
-          {{radio-button selection=newAlert.targetType value="workloadSelector"}} Workload Selector
+          {{radio-button selection=newAlert.targetType value="nodeSelector"}} Node Selector
         </label>
       </div>
       <div class="col span-6 mt-0">
         <!-- <p class="text-info text-small">Workloads that match all the selectors will be selected.</p> -->
-        {{#if (eq newAlert.targetType 'workloadSelector')}}
+        {{#if (eq newAlert.targetType 'nodeSelector')}}
           {{form-key-value
               addActionLabel="alertPage.addSelectorLabel"
-              initialMap=newAlert.targetWorkload.selector
-              changed=(action (mut newAlert.targetWorkload.selector))
+              initialMap=newAlert.targetNode.selector
+              changed=(action (mut newAlert.targetNode.selector))
           }}
         {{else}}
           <button {{action "noop"}} style="cursor:not-allowed;" class="btn bg-disabled icon-btn">
@@ -86,17 +87,17 @@
     <div style="display:inline-block;width:100px;">
       {{input-integer disabled=(not-eq newAlert.targetPod.condition 'restarts') min=1 max=1000 value=newAlert.targetPod.restartTimes}}
     </div> times within the last 5 minutes
-  {{else if (or (eq newAlert.targetType 'workload') (eq newAlert.targetType 'workloadSelector'))}}
+  {{else if (or (eq newAlert.targetType 'workload') (eq newAlert.targetType 'nodeSelector'))}}
     <div class="row">
       <div class="col span-6 mt-0">
         <div class="input-group pt-5">
           {{input-slider
-              value=newAlert.targetWorkload.unavailablePercentage
+              value=newAlert.targetNode.unavailablePercentage
               valueMin=0
               valueMax=100
               step=1
           }}
-          <span class="input-group-addon">{{newAlert.targetWorkload.unavailablePercentage}}% unavailable</span>
+          <span class="input-group-addon">{{newAlert.targetNode.unavailablePercentage}}% unavailable</span>
         </div>
       </div>
     </div>
