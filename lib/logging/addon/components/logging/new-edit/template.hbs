@@ -9,7 +9,7 @@
   </div>
 </div>
 {{logging/targets-nav
-    currentLogging=currentLogging
+    originalLogging=originalLogging
     targetType=targetType
     isClusterLevel=isClusterLevel
     pageScope=pageScope
@@ -33,25 +33,20 @@
   {{logging/target-elasticsearch
        targetType=targetType
        model=model
-       fields=fields
-       flushInterval=model.flushInterval
   }}
-
 {{else if (eq targetType 'embedded')}}
   {{#if isClusterLevel}}
     {{logging/target-embedded
         model=model
-        fields=fields
         targetType=targetType
-        flushInterval=model.flushInterval
     }}
   {{/if}}
 {{else if (eq targetType 'splunk')}}
-  {{logging/target-splunk flushInterval=model.flushInterval model=model fields=fields}}
+  {{logging/target-splunk  model=model}}
 {{else if (eq targetType 'kafka')}}
-  {{logging/target-kafka flushInterval=model.flushInterval model=model fields=fields}}
+  {{logging/target-kafka  model=model}}
 {{else if (eq targetType 'syslog')}}
-  {{logging/target-syslog flushInterval=model.flushInterval model=model fields=fields}}
+  {{logging/target-syslog model=model}}
 {{/if}}
 
 

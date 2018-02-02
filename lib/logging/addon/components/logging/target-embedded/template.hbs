@@ -17,9 +17,9 @@
     <div class="col span-6">
       <div style="margin-top: 34px;">
         <label>Date Format: </label>
-        <label class="mr-10">{{radio-button selection=dateFormat value="YYYY-MM-DD"}} YYYY-MM-DD</label>
-        <label class="mr-10">{{radio-button selection=dateFormat value="YYYY-MM"}} YYY-MMM</label>
-        <label class="mr-10">{{radio-button selection=dateFormat value="YYYY"}} YYYY</label>
+        <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY-MM-DD"}} YYYY-MM-DD</label>
+        <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY-MM"}} YYY-MMM</label>
+        <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY"}} YYYY</label>
       </div>
     </div>
   </div>
@@ -28,16 +28,4 @@
   </div>
 </section>
 
-<main class="row mt-20">
-  <div class="col span-6 logging-format">
-    <h2 class="mt-0">Log Format Preview</h2>
-    <hr/>
-    {{code-block language="yaml" code=logPreview}}
-  </div>
-  <div class="col span-6">
-    {{logging/form-additional
-        fields=fields
-        flushInterval=flushInterval
-    }}
-  </div>
-</main>
+{{logging/form-log-format logPreview=logPreview model=model}}
