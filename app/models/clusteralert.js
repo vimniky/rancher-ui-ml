@@ -24,20 +24,20 @@ const ClusterAlert = Resource.extend({
 
   threshold: function() {
     const t = get(this, 'targetType');
-    if (t === 'none' || t === 'nodeSelector') {
-      const c = get(this, 'model.targetNode.condition');
+    const c = get(this, 'targetNode.condition');
+    if (t === 'node' || t === 'nodeSelector') {
       if (c === 'cpu') {
-        return get(this, 'model.targetNode.cpuThreshold');
+        return get(this, 'targetNode.cpuThreshold');
       }
       if (c === 'mem') {
-        return get(this, 'model.targetNode.memThreshold');
+        return get(this, 'targetNode.memThreshold');
       }
       if (c === 'disk') {
-        return get(this, 'model.targetNode.diskThreshold');
+        return get(this, 'targetNode.diskThreshold');
       }
     }
     return '';
-  }.property('targetType'),
+  }.property('targetType', 'model.targetNode.{diskThreshold,memThreshold,cpuThreshold,condition}'),
 
   availableActions: function() {
     let a = this.get('actionLinks');

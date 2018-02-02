@@ -14,7 +14,7 @@
   <span class="text-small">
     {{displayTargetType}}
   </span>
-  {{#if (eq model.targetType 'workloadSelector')}}
+  {{#if (or (eq model.targetType 'workloadSelector') (eq model.targetType 'nodeSelector'))}}
     <div class="text-muted">
       {{#each displayTargetList as |item|}}
         <span
