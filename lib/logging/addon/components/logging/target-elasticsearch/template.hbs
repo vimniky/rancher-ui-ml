@@ -1,4 +1,3 @@
-{{log '---------es config' model.elasticsearchConfig}}
 <h2 class="mt-30">Elasticsearch Configuration</h2>
 <hr/>
 <div class="box">
@@ -63,7 +62,7 @@
       </div>
     </div>
     <div>
-      The generated index will be: <code class="text-italic">{{esIndex}}</code>
+      The generated index will be: <code class="text-italic">{{esIndex}}</code>, by defualt the index patters is {{if (eq pageScope 'cluster') '${clusterName}-${dateFormat}'  '${clusterName}_${projectName}-${dateFormat}'}}
     </div>
   </section>
 </div>
