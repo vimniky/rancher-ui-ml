@@ -4,12 +4,11 @@ import { inject as service } from '@ember/service'
 import { alias } from '@ember/object/computed'
 
 export default Resource.extend({
-  type: 'clusterlogging',
+  type: 'projectlogging',
   defaultTargetType: 'none',
 
   beforeSave(configType) {
     const config = get(this, configType);
-    console.log('---------set', configType, config);
     this.setProperties({
       embeddedConfig: null,
       elasticsearchConfig: null,
