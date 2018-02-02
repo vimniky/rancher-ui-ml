@@ -1,5 +1,6 @@
 .logging-targets.nav-boxes.checked-current.embedded .current:after {
-  left: -15px!important;
+  /* left: -15px!important; */
+  z-index: 1000;
 }
 .nav-boxes.logging-targets {
   .nav-box-item {
