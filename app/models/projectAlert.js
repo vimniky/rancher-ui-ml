@@ -21,9 +21,33 @@ const ProjectAlert = Resource.extend({
     }
   }.property('model.targetPod', 'model.targetWorkload'),
 
+  actions:{
+    mute() {
+      this.doAction('mute').catch(err => {
+      });
+    },
+    unmute() {
+      this.doAction('mute').catch(err => {
+      });
+    },
+    activate() {
+      this.doAction('activate').catch(err => {
+      });
+    },
+    deactivate() {
+      this.doAction('deactivate').catch(err => {
+      });
+    },
+  },
+
+  relevantState: function() {
+    return this.get('combinedState') || this.get('status.state') || 'unknown';
+  }.property('combinedState','state'),
+
   availableActions: function() {
     let a = this.get('actionLinks');
     let l = this.get('links');
+    const state = this.get('status.state');
     return [
       {
         label: 'action.edit',
@@ -35,7 +59,7 @@ const ProjectAlert = Resource.extend({
       {
         label: 'alertPage.action.mute',
         action: 'mute',
-        enabled: !!a.mute,
+        enabled: state === 'alerting',
         icon: 'icon icon-mute',
         bulkable: true,
       },
@@ -43,7 +67,21 @@ const ProjectAlert = Resource.extend({
         label: 'alertPage.action.unmute',
         action: 'unmute',
         icon: 'icon icon-unmute',
-        enabled: !!a.unmute,
+        enabled: state === 'muted',
+        bulkable: true,
+      },
+      {
+        label: 'action.deactivate',
+        action: 'deactivate',
+        icon: 'icon icon-deactivate',
+        enabled: state === 'active',
+        bulkable: true,
+      },
+      {
+        label: 'action.activate',
+        icon: 'icon icon-active',
+        action: 'activate',
+        enabled: state === 'inactive',
         bulkable: true,
       },
       {
