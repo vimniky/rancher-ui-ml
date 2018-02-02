@@ -22,11 +22,13 @@ export default Controller.extend({
       set(this, 'notifiers', data);
     });
   },
+  currentType: 'slack',
   actions: {
     showNewEditModal() {
       this.get('modalService').toggleModal('notifier/modal-new-edit', {
         closeWithOutsideClick: false,
         callback: get(this, 'fetch').bind(this),
+        controller: this,
       });
     },
   },
