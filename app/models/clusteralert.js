@@ -11,7 +11,7 @@ const ClusterAlert = Resource.extend({
   targetType: function() {
     const targetSystemService = get(this, 'targetSystemService');
     const targetNode = get(this, 'targetNode');
-    if (targetSystemService && targetSystemService.id) {
+    if (targetSystemService && targetSystemService.condition) {
       return 'systemService';
     }
     if (targetNode && targetNode.id) {

@@ -7,16 +7,50 @@
   {{badge-state model=model}}
 </td>
 <td data-title="{{dt.displayName}}" class="clip">
-  {{model.displayName}}
-  <div class="text-small text-muted">{{model.description}}</div>
+  <a href="">{{model.displayName}}</a>
+  <div class="text-small text-muted clip">{{model.description}}</div>
 </td>
 <td data-title="{{dt.target}}" class="clip">
-  {{displayTargetType}}
+  <span class="text-small">
+    {{displayTargetType}}
+  </span>
   {{#if (eq model.targetType 'workloadSelector')}}
     <div class="text-muted">
       {{#each displayTargetList as |item|}}
-        <span class="badge badge-xs bg-info" style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;">{{item}}</span>
+        <span
+          class="badge badge-xs bg-info"
+          style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;"
+        >
+          {{item}}
+        </span>
       {{/each}}
+    </div>
+  {{else if (eq model.targetType 'pod')}}
+    <div class="text-muted">
+      <span
+        class="badge badge-xs bg-info"
+        style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;"
+      >
+        {{model.targetPod.id}}
+      </span>
+    </div>
+  {{else if (eq model.targetType 'workload')}}
+    <div class="text-muted">
+      <span
+        class="badge badge-xs bg-info"
+        style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;"
+      >
+        {{model.targetWorkload.id}}
+      </span>
+    </div>
+  {{else if (eq model.targetType 'systemService')}}
+    <div class="text-muted">
+      <span
+        class="badge badge-xs bg-info"
+        style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;"
+      >
+        {{model.targetSystemService.condition}}
+      </span>
     </div>
   {{/if}}
 </td>
@@ -24,7 +58,16 @@
   {{displayCondition}}
 </td>
 <td data-title="{{dt.recipients}}" class="clip">
-  {{recipients}}
+  {{#if model.recipients.length}}
+    {{model.recipients.length}} items
+    <div class="text-muted clip">
+      {{#each model.recipients as |item|}}
+        <span class="text-capitalize">{{item.notifierType}}</span>/{{item.recipient}}
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="text-muted">NONE</div>
+  {{/if}}
 </td>
 
 <td data-title="{{t 'generic.actions'}}" class="actions">
