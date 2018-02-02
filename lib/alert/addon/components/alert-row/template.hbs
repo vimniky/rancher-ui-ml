@@ -11,17 +11,17 @@
   <div class="text-small text-muted">{{model.description}}</div>
 </td>
 <td data-title="{{dt.target}}" class="clip">
-  {{targetType}}
+  {{displayTargetType}}
   {{#if (eq model.targetType 'workloadSelector')}}
     <div class="text-muted">
-      {{#each targetAry as |item|}}
+      {{#each displayTargetList as |item|}}
         <span class="badge badge-xs bg-info" style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;">{{item}}</span>
       {{/each}}
     </div>
   {{/if}}
 </td>
 <td data-title="{{dt.condition}}" class="clip">
-  {{condition}}
+  {{displayCondition}}
 </td>
 <td data-title="{{dt.recipients}}" class="clip">
   {{recipients}}

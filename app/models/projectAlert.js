@@ -7,7 +7,16 @@ const ProjectAlert = Resource.extend({
   init(...args) {
     this._super(...args);
   },
-
+  cb() {
+    this.delete().then(res => {
+      get(this, 'store')._remove('projectalert', this);
+    });
+  },
+  actions: {
+    promptDelete: function() {
+      this.get('modalService').toggleModal('confirm-delete', {resources: [this]});
+    },
+  },
   targetType: function() {
     const tp = get(this, 'targetPod');
     const tw = get(this, 'targetWorkload');
