@@ -9,7 +9,6 @@ export default Resource.extend({
 
   beforeSave(configType) {
     const config = get(this, configType);
-    console.log('---------set', configType, config);
     this.setProperties({
       embeddedConfig: null,
       elasticsearchConfig: null,
