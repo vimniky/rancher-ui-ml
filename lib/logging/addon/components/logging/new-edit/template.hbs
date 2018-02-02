@@ -24,9 +24,26 @@
       Embedded Elasticsearch is experimental, no persistent storage will be provided.
         </li>
         <li style="list-style: circle;">The embedded deployment includes ElasticSearch and Kibana. Elasticsearch requests at least 2 CPU and 4G MEM available on the node it is deployed.</li>
+
       </ul>
     </div>
   </div>
+
+  {{#if originalModel.embeddedConfig}}
+    <div class="banner bg-success">
+      <div class="banner-icon p-20"><i class="icon icon-check"></i></div>
+      <div class="banner-message p-10">
+        <ul>
+          <li style="list-style: circle;">
+            <a href="#" target="_blank"><i class="icon icon-external-link"></i> KIBANA</a>
+          </li>
+          <li style="list-style: circle;">
+            <a href=""  target="_blank"><i class="icon icon-external-link"></i> OTHER</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  {{/if}}
 {{/if}}
 
 {{#if (eq targetType 'elasticsearch')}}
