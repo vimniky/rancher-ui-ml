@@ -9,7 +9,9 @@ export default Route.extend({
   model() {
     const cs = get(this, 'globalStore');
     return hash({
-      notifiers: cs.findAll('notifier'),
+      notifiers: cs.findAll('notifier').then(() => {
+        return cs.all('notifier');
+      }),
     });
   },
 });
