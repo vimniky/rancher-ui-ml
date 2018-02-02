@@ -69,11 +69,11 @@
 <hr/>
 <section class="row">
   <div class="col span-1">
-    <label class="{{if (not-eq targetType 'systemService') 'pt-10' 0}}">IS</label>
+    <div style="{{if (eq targetType 'systemService') '' 'padding-top: 6px;'}}">IS</div>
   </div>
   <div class="col span-10">
   {{#if (eq newAlert.targetType 'systemService')}}
-    <label class="mr-10">
+    <label class="mr-10 pt-5">
       {{radio-button selection="whatever" value="whatever"}} Unhealthy
     </label>
   {{else if (or (eq newAlert.targetType 'node') (eq newAlert.targetType 'nodeSelector'))}}
@@ -88,7 +88,7 @@
           classNames="form-contorl input-sm"
           disabled=(not-eq newAlert.targetNode.condition 'cpu')
           min=1
-          value=percent
+          value=newAlert.targetNode.cpuThreshold
       }}
     </div>%
 
@@ -99,8 +99,9 @@
       {{input-integer
           classNames="form-contorl input-sm"
           disabled=(not-eq newAlert.targetNode.condition 'mem')
-          min=1 max=100
-          value=percent
+          min=1
+          max=100
+          value=newAlert.targetNode.memThreshold
       }}
     </div>%
 
@@ -113,7 +114,7 @@
           disabled=(not-eq newAlert.targetNode.condition 'disk')
           min=1
           max=100
-          value=percent
+          value=newAlert.targetNode.diskThreshold
       }}
     </div>%
   {{else}}
