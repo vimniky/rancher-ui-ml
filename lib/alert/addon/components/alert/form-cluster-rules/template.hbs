@@ -78,7 +78,7 @@
     </label>
   {{else if (or (eq newAlert.targetType 'node') (eq newAlert.targetType 'nodeSelector'))}}
     <label class="mr-10">
-      {{radio-button selection=newAlert.targetNode.condition value="notready"}} Not Ready
+      {{radio-button selection=newAlert.targetNode.condition value="notready"}} Kubelet node not ready
     </label>
     <label class="ml-10">
       {{radio-button selection=newAlert.targetNode.condition value="cpu"}} CPU usage over

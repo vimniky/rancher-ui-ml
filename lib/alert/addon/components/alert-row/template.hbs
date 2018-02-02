@@ -43,7 +43,25 @@
         {{model.targetWorkload.id}}
       </span>
     </div>
+  {{else if (eq model.targetType 'node')}}
+    <div class="text-muted">
+      <span
+        class="badge badge-xs bg-info"
+        style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;"
+      >
+        {{model.targetNode.id}}
+      </span>
+    </div>
   {{else if (eq model.targetType 'systemService')}}
+    <div class="text-muted">
+      <span
+        class="badge badge-xs bg-info"
+        style="color:#ecf0f1!important;border-radius:1px;margin-right:2px;"
+      >
+        {{model.targetSystemService.condition}}
+      </span>
+    </div>
+  {{else if (eq model.targetType 'node')}}
     <div class="text-muted">
       <span
         class="badge badge-xs bg-info"
@@ -59,8 +77,8 @@
 </td>
 <td data-title="{{dt.recipients}}" class="clip">
   {{#if model.recipients.length}}
-    {{model.recipients.length}} items
-    <div class="text-muted clip">
+    <span class="text-small">{{model.recipients.length}} items</span>
+    <div class="text-muted clip text-small">
       {{#each model.recipients as |item|}}
         <span class="text-capitalize">{{item.notifierType}}</span>/{{item.recipient}}
       {{/each}}

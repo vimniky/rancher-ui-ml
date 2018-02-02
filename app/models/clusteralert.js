@@ -22,6 +22,23 @@ const ClusterAlert = Resource.extend({
     }
   }.property('model.targetSystemService', 'model.targetNode'),
 
+  threshold: function() {
+    const t = get(this, 'targetType');
+    if (t === 'none' || t === 'nodeSelector') {
+      const c = get(this, 'model.targetNode.condition');
+      if (c === 'cpu') {
+        return get(this, 'model.targetNode.cpuThreshold');
+      }
+      if (c === 'mem') {
+        return get(this, 'model.targetNode.memThreshold');
+      }
+      if (c === 'disk') {
+        return get(this, 'model.targetNode.diskThreshold');
+      }
+    }
+    return '';
+  }.property('targetType'),
+
   availableActions: function() {
     let a = this.get('actionLinks');
     let l = this.get('links');
