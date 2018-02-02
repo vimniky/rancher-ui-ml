@@ -1,7 +1,7 @@
 import Resource from 'ember-api-store/models/resource';
 import { get, set } from '@ember/object';
 
-export default Resource.extend({
+const ProjectAlert = Resource.extend({
   type: 'projectalert',
 
   init(...args) {
@@ -65,3 +65,10 @@ export default Resource.extend({
     ];
   }.property('actionLinks.{mute,unmute}','links.{update,remove}'),
 });
+
+ProjectAlert.reopenClass({
+  pollTransitioningDelay: 300,
+  pollTransitioningInterval: 3000,
+});
+
+export default ProjectAlert;

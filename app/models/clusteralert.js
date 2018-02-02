@@ -1,7 +1,7 @@
 import Resource from 'ember-api-store/models/resource';
 import { get, set } from '@ember/object';
 
-export default Resource.extend({
+const ClusterAlert = Resource.extend({
   type: 'clusteralert',
 
   init(...args) {
@@ -65,3 +65,10 @@ export default Resource.extend({
     ];
   }.property('actionLinks.{mute,unmute}','links.{update,remove}'),
 });
+
+ClusterAlert.reopenClass({
+  pollTransitioningDelay: 300,
+  pollTransitioningInterval: 3000,
+});
+
+export default ClusterAlert;
